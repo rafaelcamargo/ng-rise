@@ -1,5 +1,5 @@
 # ng-rise
-ng-rise is a minimal AngularJS application. Its content has only the minimum conditions to start code an app: Angular, Angular-Route and automated tasks to watch and update js and styl files.
+ng-rise is a minimal AngularJS application. Its content has only the minimum conditions to start code an app: *Angular*, *Angular-Route* and automated tasks to watch and update *.js* and *.styl* files.
 
 
 ## Installation
@@ -9,7 +9,7 @@ You have two ways to install ng-rise:
 ### Fast
 
 ```
-wget -o ~/bin/ng-rise https://raw.githubusercontent.com/rafaelcamargo/ng-rise/master/install/ng-rise
+wget https://raw.githubusercontent.com/rafaelcamargo/ng-rise/master/install/ng-rise -O /bin/ng-rise
 chmod +x ~/bin/ng-rise
 ng-rise
 ```
