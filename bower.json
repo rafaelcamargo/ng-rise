@@ -1,0 +1,8 @@
+{
+  "name": "ca-developers-guide",
+  "version": "0.1.0",
+  "dependencies": {
+    "angular": "~1.3.13",
+    "angular-route": "~1.3.13"
+  }
+}

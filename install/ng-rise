@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+#Cloning repo
+git clone '...';
+
+#Acessing project
+cd ng-rise;
+
+#Removing installing script
+rm -rf install;
+
+#Installing dev dependencies
+npm install;
+
+#Installing app dependencies
+grunt build;
+
+#Opening app
+cygstart http://localhost:3000/;
+
+#Starting dev mode
+grunt start;
