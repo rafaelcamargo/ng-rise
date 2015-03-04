@@ -9,7 +9,7 @@ You have two ways to install ng-rise:
 ### Fast
 
 ```
-wget https://raw.githubusercontent.com/rafaelcamargo/ng-rise/master/install/ng-rise -O /bin/ng-rise
+wget https://raw.githubusercontent.com/rafaelcamargo/ng-rise/master/install/ng-rise -O ~/bin/ng-rise
 chmod +x ~/bin/ng-rise
 ng-rise
 ```
