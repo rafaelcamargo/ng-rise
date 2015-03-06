@@ -17,8 +17,16 @@ npm install;
 #Installing app dependencies
 grunt build;
 
+# getting current open browser command
+case $( uname -s ) in
+Darwin)  open=open;;
+MINGW*)  open=start;;
+CYGWIN*) open=cygstart;;
+*)       open=xdg-open;;
+esac
+
 #Opening app
-cygstart http://localhost:3000/;
+$open http://localhost:3000/;
 
 #Starting dev mode
 grunt start;
