@@ -9,7 +9,7 @@ You have two ways to install ng-rise:
 ### Fast
 Approximate time: *1m40s on 1Mbps internet*
 ```
-wget https://raw.githubusercontent.com/rafaelcamargo/ng-rise/master/install/ng-rise -O ~/bin/ng-rise
+curl -o ~/bin/ng-rise https://raw.githubusercontent.com/rafaelcamargo/ng-rise/master/install/ng-rise
 chmod +x ~/bin/ng-rise
 ng-rise
 ```
