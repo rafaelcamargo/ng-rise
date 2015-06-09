@@ -1,6 +1,9 @@
 # ng-rise
 ng-rise is a minimal AngularJS application. Its content has only the minimum conditions to start code an app: *Angular*, *Angular-Route* and automated tasks to watch and update *.js* and *.styl* files.
 
+## Requirements
+To run this project, you need Nodejs installed in your system. *node ~v0.10 recommended*
+
 
 ## Installation
 
@@ -25,19 +28,30 @@ grunt start
 open http://localhost:3000
 ```
 
+### Troubleshooting
+- If you get `npm: command not found`, make sure you have npm-cli installed in your system. *Nodejs should install it automatically*.
+- If you get `grunt: command not found`, make sure npm installed `grunt-cli` successfully.
+
 
 ## Base structure
 
 ```
 index.html
-| app
-  app.js
-  | intro
-    introView.html
-    introController.js
-| assets
-  | css
-  | js
-  | styl
-    native.styl
+app
+|-- app.js
+|-- routes.js
+|-- commons
+|-- |-- directives
+|-- |-- |-- welcome
+|-- |-- |-- |-- welcome-template.html
+|-- |-- |-- |-- welcome-directive.js
+|-- views
+|-- |-- introduction
+|-- |-- |-- introduction-template.html
+|-- |-- |-- introduction-controller.js
+assets
+|-- css
+|-- js
+|-- styl
+|-- |-- native.styl
 ```
