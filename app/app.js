@@ -1,10 +1,5 @@
-var ngRise = angular.module('ngRise', ['ngRoute'])
-	.config(function($routeProvider){
-		$routeProvider
-			.when('/', {
-				templateUrl: 'app/intro/introView.html',
-				controller: 'introController'
-			}).otherwise({
-				redirectTo: '/'
-			});
-		});
+;(function(window){
+
+  window.app = angular.module('app', ['ngRoute']);
+
+})(window);
