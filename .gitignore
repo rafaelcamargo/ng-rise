@@ -161,4 +161,5 @@ app.min.js
 lib.min.js
 
 #Other
+coverage/
 angular-route.min.js.map
