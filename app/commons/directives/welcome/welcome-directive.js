@@ -10,7 +10,7 @@
         message: '@'
       },
       templateUrl: 'app/commons/directives/welcome/welcome-template.html'
-    }
+    };
 
   });
 
