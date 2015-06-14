@@ -160,6 +160,11 @@ app.min.css
 app.min.js
 lib.min.js
 
-#Other
+#Tests generated files
 coverage/
+screenshots/
+spec/visual/results/
+
+#Other
+install/
 angular-route.min.js.map
