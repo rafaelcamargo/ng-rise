@@ -54,4 +54,17 @@ assets
 |-- js
 |-- styl
 |-- |-- native.styl
+spec
+|-- unit
+|-- |-- commons
+|-- |-- |-- directives
+|-- |-- |-- |-- welcome-spec.js
+|-- |-- views
+|-- |-- |-- introduction-spec.js
+|-- visual
+|-- |-- screenshots
+|-- |-- |-- welcome-title.png
+|-- |-- |-- welcome-message.png
+|-- |-- |-- welcome-version.png
+|-- |-- welcome-visual-spec.js
 ```
