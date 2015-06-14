@@ -49,12 +49,12 @@ module.exports = function(grunt) {
 
   	'http-server': {
       dev: {
-        port: 3000,
+        port: 9000,
         host: '127.0.0.1',
         showDir : true,
         autoIndex: true,
         ext: 'html',
-        runInBackground: true
+        runInBackground: false
       }
     },
 
@@ -68,6 +68,19 @@ module.exports = function(grunt) {
           }
         ],
       },
+    },
+
+    phantomcss: {
+      options: {
+        screenshots: 'screenshots',
+        results: 'results',
+        viewportSize: [1280, 800],
+        mismatchTolerance: 0.05,
+        rootUrl: 'http://localhost:9000/'
+      },
+      src: [
+        'spec/visual/**/*.js'
+      ]
     },
 
   	watch: {
@@ -87,6 +100,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-concat-in-order');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-phantomcss');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-http-server');
 
