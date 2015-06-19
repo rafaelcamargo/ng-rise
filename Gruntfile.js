@@ -1,30 +1,13 @@
 module.exports = function(grunt) {
   
   pathAssets = 'assets/';
-  pathLibs = 'bower_components/';
+  pathLibs = 'node_modules/';
   pathStylus = pathAssets + 'styl/';
   pathCss = pathAssets + 'css/';
 
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
-
-  	'bower-install-simple' : {
-      options: {
-        color: true,
-        directory: pathLibs
-      },
-      prod: {
-        options: {
-          production: true
-        }
-      },
-      dev: {
-        options: {
-            production: false
-        }
-      }
-  	},
 
     stylus: {
       compile: {
@@ -47,27 +30,26 @@ module.exports = function(grunt) {
 	    }
   	},
 
-  	'http-server': {
-      dev: {
-        port: 9000,
-        host: '127.0.0.1',
-        showDir : true,
-        autoIndex: true,
-        ext: 'html',
-        runInBackground: false
-      }
-    },
-
     copy :{
       main: {
         files: [
           {
             expand: true,
             flatten: true,
-            src: ['bower_components/angular-route/angular-route.min.js.map'], dest: 'assets/js/'
+            src: ['node_modules/angular-route/angular-route.min.js.map'], dest: 'assets/js/'
           }
         ],
       },
+    },
+
+    jshint: {
+      all: ['Gruntfile.js','app/**.*.js','spec/**/*.js']
+    },
+
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js'
+      }
     },
 
     phantomcss: {
@@ -92,7 +74,18 @@ module.exports = function(grunt) {
   			files: ['app/**/*.js'],
   			tasks: ['concat_in_order:dist', 'copy'],
   		}
-  	}
+  	},
+
+    'http-server': {
+      dev: {
+        port: 9000,
+        host: '127.0.0.1',
+        showDir : true,
+        autoIndex: true,
+        ext: 'html',
+        runInBackground: false
+      }
+    }
 
   });
 
@@ -100,11 +93,23 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-concat-in-order');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-phantomcss');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-http-server');
 
-  grunt.registerTask('build', ['bower-install-simple:prod', 'stylus', 'concat_in_order', 'copy']);
-  grunt.registerTask('start', ['http-server', 'watch']);
+  grunt.registerTask('build', [
+    'stylus',
+    'concat_in_order',
+    'copy',
+    'jshint',
+    'karma'
+  ]);
+
+  grunt.registerTask('start', [
+    'http-server',
+    'watch'
+  ]);
 
 };

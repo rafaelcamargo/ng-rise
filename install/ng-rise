@@ -6,15 +6,18 @@ set -e
 git clone git@github.com:rafaelcamargo/ng-rise.git;
 
 #Acessing project
+echo 'Opening project...';
 cd ng-rise;
 
 #Removing installing script
 rm -rf install;
 
 #Installing dev dependencies
+echo 'Installing dependencies...';
 npm install;
 
 #Installing app dependencies
+echo 'Building dependencies...';
 grunt build;
 
 # getting current open browser command
@@ -26,7 +29,9 @@ CYGWIN*) open=cygstart;;
 esac
 
 #Opening app
-$open http://localhost:3000/;
+echo 'Opening browser...';
+$open http://localhost:9000/;
 
 #Starting dev mode
+echo 'ng-rise started!';
 grunt start;
