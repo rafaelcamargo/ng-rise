@@ -25,7 +25,7 @@ cd ng-rise
 npm install
 grunt build
 grunt start
-open http://localhost:3000
+open http://localhost:9000
 ```
 
 ### Troubleshooting
