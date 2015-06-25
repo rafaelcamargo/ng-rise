@@ -83,7 +83,7 @@ module.exports = function(grunt) {
         showDir : true,
         autoIndex: true,
         ext: 'html',
-        runInBackground: false
+        runInBackground: true
       }
     }
 
