@@ -10,7 +10,6 @@ To run this project, you need Nodejs installed in your system. *node ~v0.10 reco
 You have two ways to install ng-rise:
 
 ### Fast
-Approximate time: *1m40s on 1Mbps internet*
 ```
 curl -o ~/bin/ng-rise https://raw.githubusercontent.com/rafaelcamargo/ng-rise/master/install/ng-rise
 chmod +x ~/bin/ng-rise
