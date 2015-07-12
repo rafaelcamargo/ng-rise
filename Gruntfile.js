@@ -9,10 +9,10 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
-    stylus: {
-      compile: {
+    sass: {
+      dist: {
         files: {
-          'assets/css/app.min.css': ['assets/styl/**/*.styl']
+          'assets/css/app.min.css': 'assets/sass/**/*.sass'
         }
       }
     },
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-bower-install-simple');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-concat-in-order');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-http-server');
 
   grunt.registerTask('build', [
-    'stylus',
+    'sass',
     'concat_in_order',
     'copy',
     'jshint',

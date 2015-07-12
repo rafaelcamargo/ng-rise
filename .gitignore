@@ -156,9 +156,9 @@ local.properties
 .texlipse
 
 #Built files
-app.min.css
-app.min.js
-lib.min.js
+.sass-cache/
+assets/css/
+assets/js/
 
 #Tests generated files
 ./coverage/
