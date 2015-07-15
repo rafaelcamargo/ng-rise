@@ -1,9 +1,20 @@
 module.exports = function(grunt) {
   
-  pathAssets = 'assets/';
-  pathLibs = 'node_modules/';
-  pathStylus = pathAssets + 'styl/';
-  pathCss = pathAssets + 'css/';
+  var pathLibs = 'node_modules/';
+  var pathApp = 'app/';
+  var pathSpec = 'spec/';
+  var pathAssets = 'assets/';
+  var pathStyles = pathAssets + 'sass/';
+
+  var libFiles = pathLibs + '**/*.min.js';
+  var styleFiles = pathStyles + '**/*.sass';
+  var appFiles = pathApp + '**/*.js';
+  var specFiles = pathSpec + '**/*.js';
+  var configFiles = [
+    'package.json',
+    'karma.conf.js',
+    'Gruntfile.js'
+  ];
 
   grunt.initConfig({
 
@@ -12,23 +23,26 @@ module.exports = function(grunt) {
     sass: {
       dist: {
         files: {
-          'assets/css/app.min.css': 'assets/sass/**/*.sass'
+          'assets/css/app.min.css': styleFiles
         }
       }
     },
 
-  	concat_in_order: {
-	    dist : {
-	    	files : {
-	    		'assets/js/app.min.js' : 'app/**/*.js'
-	    	}
-	    },
-	    lib : {
-  			files : {
-  				'assets/js/lib.min.js' : [pathLibs + 'angular/angular.min.js', pathLibs + 'angular-route/angular-route.min.js']
-  			}
-	    }
-  	},
+    concat_in_order: {
+      dist : {
+        files : {
+          'assets/js/app.min.js' : 'app/**/*.js'
+        }
+      },
+      lib : {
+        files : {
+          'assets/js/lib.min.js' : [
+            pathLibs + 'angular/angular.min.js',
+            pathLibs + 'angular-route/angular-route.min.js'
+          ]
+        }
+      }
+    },
 
     copy :{
       main: {
@@ -36,14 +50,17 @@ module.exports = function(grunt) {
           {
             expand: true,
             flatten: true,
-            src: ['node_modules/angular-route/angular-route.min.js.map'], dest: 'assets/js/'
+            src: 'node_modules/angular-route/angular-route.min.js.map',
+            dest: 'assets/js/'
           }
         ],
       },
     },
 
     jshint: {
-      all: ['Gruntfile.js','app/**.*.js','spec/**/*.js']
+      dist: appFiles,
+      spec: specFiles,
+      conf: configFiles
     },
 
     karma: {
@@ -65,21 +82,36 @@ module.exports = function(grunt) {
       ]
     },
 
-  	watch: {
-  		styles: {
-  			files: pathStylus + '**/*.styl',
-  			tasks: ['stylus']
-  		},
-  		scripts: {
-  			files: ['app/**/*.js'],
-  			tasks: ['concat_in_order:dist', 'copy'],
-  		}
-  	},
+    watch: {
+      styles: {
+        files: styleFiles,
+        tasks: ['sass']
+      },
+      dist: {
+        files: appFiles,
+        tasks: [
+          'jshint:dist',
+          'concat_in_order:dist'
+        ]
+      },
+      lib: {
+        files: libFiles,
+        tasks: ['concat_in_order:lib']
+      },
+      spec: {
+        files: specFiles,
+        tasks: ['jshint:spec']
+      },
+      conf: {
+        files: configFiles,
+        tasks: ['jshint:conf']
+      }
+    },
 
     'http-server': {
       dev: {
         port: 9000,
-        host: '127.0.0.1',
+        host: '0.0.0.0',
         showDir : true,
         autoIndex: true,
         ext: 'html',
@@ -89,7 +121,6 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.loadNpmTasks('grunt-bower-install-simple');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-concat-in-order');
   grunt.loadNpmTasks('grunt-contrib-copy');
