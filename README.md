@@ -4,8 +4,6 @@ ng-rise is a minimal AngularJS application. Its content has only the minimum con
 ## Requirements
 To run this project, you need Nodejs installed in your system. *node ~v0.10 recommended*
 
-Besides Node, you also need Ruby installed to perform the [Sass](http://sass-lang.com/) grunt task. To install Ruby, I highly recommend [rbenv](https://github.com/sstephenson/rbenv). Once Ruby is installed, execute `$ gem install sass` to install Sass compiler.
-
 ## Installation
 
 You have two ways to install ng-rise:
@@ -22,6 +20,7 @@ ng-rise
 ```
 git clone git@github.com:rafaelcamargo/ng-rise.git
 cd ng-rise
+npm install -g grunt-cli karma-cli
 npm install
 grunt build
 grunt start
@@ -55,16 +54,9 @@ assets
 |-- styl
 |-- |-- native.styl
 spec
-|-- unit
-|-- |-- commons
-|-- |-- |-- directives
-|-- |-- |-- |-- welcome-spec.js
-|-- |-- views
-|-- |-- |-- introduction-spec.js
-|-- visual
-|-- |-- screenshots
-|-- |-- |-- welcome-title.png
-|-- |-- |-- welcome-message.png
-|-- |-- |-- welcome-version.png
-|-- |-- welcome-visual-spec.js
+|-- commons
+|-- |-- directives
+|-- |-- |-- welcome-spec.js
+|-- views
+|-- |-- introduction-spec.js
 ```

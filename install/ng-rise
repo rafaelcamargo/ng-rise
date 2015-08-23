@@ -14,6 +14,7 @@ rm -rf install;
 
 #Installing dev dependencies
 echo 'Installing dependencies...';
+npm install -g grunt-cli karma-cli
 npm install;
 
 #Installing app dependencies

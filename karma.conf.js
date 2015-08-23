@@ -21,7 +21,7 @@ module.exports = function(config) {
       'node_modules/angular-mocks/angular-mocks.js',
       'app/**/*.html',
       'app/**/*.js',
-      'spec/unit/**/*-spec.js'
+      'spec/**/*-spec.js'
     ],
 
 
@@ -32,7 +32,6 @@ module.exports = function(config) {
       'karma-jasmine',
       'karma-ng-html2js-preprocessor',
       'karma-phantomjs-launcher',
-      'karma-chrome-launcher',
       'karma-coverage'
     ],
 
@@ -87,7 +86,6 @@ module.exports = function(config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: [
       'PhantomJS'
-      //'Chrome'
     ],
 
 
