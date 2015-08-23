@@ -30,6 +30,7 @@ open http://localhost:9000
 ### Troubleshooting
 - If you get `npm: command not found`, make sure you have npm-cli installed in your system. *Nodejs should install it automatically*.
 - If you get `grunt: command not found`, make sure npm has successfully installed `grunt-cli`.
+- If you get `karma: command not found`, make sure npm has successfully installed `karma-cli`.
 
 
 ## Base structure
@@ -51,8 +52,8 @@ app
 assets
 |-- css
 |-- js
-|-- styl
-|-- |-- native.styl
+|-- sass
+|-- |-- native.sass
 spec
 |-- commons
 |-- |-- directives
