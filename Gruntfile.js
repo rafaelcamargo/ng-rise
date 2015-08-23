@@ -20,14 +20,6 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
-    sass: {
-      dist: {
-        files: {
-          'assets/css/app.min.css': styleFiles
-        }
-      }
-    },
-
     concat_in_order: {
       dist : {
         files : {
@@ -67,19 +59,6 @@ module.exports = function(grunt) {
       unit: {
         configFile: 'karma.conf.js'
       }
-    },
-
-    phantomcss: {
-      options: {
-        screenshots: 'screenshots',
-        results: 'results',
-        viewportSize: [1280, 800],
-        mismatchTolerance: 0.05,
-        rootUrl: 'http://localhost:9000/'
-      },
-      src: [
-        'spec/visual/**/*.js'
-      ]
     },
 
     watch: {
@@ -126,12 +105,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-phantomcss');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-http-server');
 
   grunt.registerTask('build', [
-    'sass',
     'concat_in_order',
     'copy',
     'jshint',
