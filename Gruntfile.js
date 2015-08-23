@@ -20,6 +20,17 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
+    sass: {
+        options: {
+            sourceMap: true
+        },
+        dist: {
+            files: {
+                'assets/css/app.min.css' : styleFiles
+            }
+        }
+    },
+
     concat_in_order: {
       dist : {
         files : {
@@ -100,7 +111,7 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-concat-in-order');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -109,6 +120,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-http-server');
 
   grunt.registerTask('build', [
+    'sass',
     'concat_in_order',
     'copy',
     'jshint',
