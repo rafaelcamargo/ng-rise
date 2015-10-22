@@ -4,10 +4,10 @@ module.exports = function(grunt) {
   var pathApp = 'app/';
   var pathSpec = 'spec/';
   var pathAssets = 'assets/';
-  var pathStyles = pathAssets + 'sass/';
+  var pathStyles = pathAssets + 'styl/';
 
   var libFiles = pathLibs + '**/*.min.js';
-  var styleFiles = pathStyles + '**/*.sass';
+  var styleFiles = pathStyles + '**/*.styl';
   var appFiles = pathApp + '**/*.js';
   var specFiles = pathSpec + '**/*.js';
   var configFiles = [
@@ -20,21 +20,18 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
-    sass: {
-        options: {
-            sourceMap: true
-        },
-        dist: {
-            files: {
-                'assets/css/app.min.css' : styleFiles
-            }
+    stylus: {
+      compile: {
+        files: {
+          'assets/css/app.min.css': styleFiles
         }
+      }
     },
 
     concat_in_order: {
       dist : {
         files : {
-          'assets/js/app.min.js' : 'app/**/*.js'
+          'assets/js/app.min.js' : appFiles
         }
       },
       lib : {
@@ -75,7 +72,7 @@ module.exports = function(grunt) {
     watch: {
       styles: {
         files: styleFiles,
-        tasks: ['sass']
+        tasks: ['stylus']
       },
       dist: {
         files: appFiles,
@@ -111,7 +108,7 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-concat-in-order');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -120,7 +117,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-http-server');
 
   grunt.registerTask('build', [
-    'sass',
+    'stylus',
     'concat_in_order',
     'copy',
     'jshint',

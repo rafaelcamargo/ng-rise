@@ -1,6 +1,6 @@
 {
   "name": "ng-rise",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Rise a lite AngularJS application in minutes",
   "author": "Rafael Camargo <contato@rafaelcamargo.com>",
   "repository": {
@@ -18,10 +18,10 @@
     "grunt-concat-in-order": "^0.1.6",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-stylus": "^0.22.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-http-server": "^1.2.0",
     "grunt-karma": "^0.11.0",
-    "grunt-sass": "^1.0.0",
     "jasmine-core": "~2.3.0",
     "karma": "^0.12.36",
     "karma-coverage": "~0.3.1",
