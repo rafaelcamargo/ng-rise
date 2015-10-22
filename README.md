@@ -1,5 +1,5 @@
 # ng-rise
-ng-rise is a minimal AngularJS application. Its content has only the minimum conditions to start code an app: *Angular*, *Angular-Route* and automated tasks to watch and update *.js* and *.sass* files.
+ng-rise is a minimal AngularJS application. Its content has only the minimum conditions to start code an app: *Angular*, *Angular-Route* and automated tasks to watch and update *.js* and *.styl* files.
 
 ## Requirements
 To run this project, you need Nodejs installed in your system. *node ~v0.10 recommended*
@@ -50,10 +50,8 @@ app
 |-- |-- |-- introduction-template.html
 |-- |-- |-- introduction-controller.js
 assets
-|-- css
-|-- js
-|-- sass
-|-- |-- native.sass
+|-- styl
+|-- |-- native.styl
 spec
 |-- commons
 |-- |-- directives
