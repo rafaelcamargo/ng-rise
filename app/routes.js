@@ -1,4 +1,4 @@
-;(function(app){
+(function(app){
 
   app.config(function($routeProvider){
     $routeProvider.when('/', {
@@ -9,4 +9,4 @@
     });
   });
 
-})(app);
+}(app));

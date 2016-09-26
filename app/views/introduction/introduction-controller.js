@@ -1,4 +1,4 @@
-;(function(app){
+(function(app){
 
   app.controller('introductionController', ['$scope', function($scope){
 
@@ -7,4 +7,4 @@
 
   }]);
 
-})(app);
+}(app));

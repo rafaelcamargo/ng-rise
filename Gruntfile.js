@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-  
+
   var pathLibs = 'node_modules/';
   var pathApp = 'app/';
   var pathSpec = 'spec/';
@@ -53,8 +53,8 @@ module.exports = function(grunt) {
             src: 'node_modules/angular-route/angular-route.min.js.map',
             dest: 'assets/js/'
           }
-        ],
-      },
+        ]
+      }
     },
 
     jshint: {

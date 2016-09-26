@@ -1,4 +1,4 @@
-;(function(app){
+(function(app){
 
   app.directive('welcome', function(){
 
@@ -14,4 +14,4 @@
 
   });
 
-})(app);
+}(app));
