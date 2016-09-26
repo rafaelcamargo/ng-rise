@@ -4,7 +4,8 @@ machine:
 
 test:
   override:
-    - ./node_modules/grunt-cli/bin/grunt build
+    - npm install -g grunt-cli karma-cli
+    - grunt build
 
 general:
   artifacts:
