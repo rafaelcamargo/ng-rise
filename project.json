@@ -1,0 +1,89 @@
+{
+  "index": {
+    "source": {
+      "file": "src/index.html"
+    },
+    "dist": {
+      "root": "dist/",
+      "file": "dist/index.html"
+    }
+  },
+  "templates": {
+    "source": {
+      "files": "src/scripts/**/*-template.html",
+      "module": {
+        "name": "templates"
+      }
+    },
+    "dist": {
+      "root": "dist/scripts",
+      "filename": "templates.min.js"
+    }
+  },
+  "scripts": {
+    "source": {
+      "files": [
+        "src/scripts/**/*.js",
+        "!src/scripts/**/*.test.js"
+      ]
+    },
+    "vendor": {
+      "files": [
+        "node_modules/angular/angular.min.js",
+        "node_modules/angular-resource/angular-resource.min.js",
+        "node_modules/angular-ui-router/release/angular-ui-router.min.js"
+      ]
+    },
+    "dist": {
+      "root": "dist/scripts",
+      "filename": "app.min.js",
+      "vendor": {
+        "filename": "vendor.min.js"
+      }
+    },
+    "test": {
+      "files": "src/scripts/**/*.test.js",
+      "coverage": "src/scripts/**/!(*-resource|*.test).js",
+      "vendor": {
+        "files": [
+          "node_modules/angular-mocks/angular-mocks.js"
+        ]
+      }
+    }
+  },
+  "styles": {
+    "source": {
+      "files": "src/styles/**/*.styl"
+    },
+    "vendor": {
+      "files": [
+        "node_modules/ggrid/dist/ggrid.min.css"
+      ]
+    },
+    "dist": {
+      "root": "dist/styles",
+      "file": "dist/styles/app.min.css",
+      "filename": "app.min.css",
+      "vendor": {
+        "filename": "vendor.min.css"
+      }
+    }
+  },
+  "images": {
+    "source": {
+      "files": "src/images/**/*.*"
+    },
+    "dist": {
+      "root": "dist/images/"
+    }
+  },
+  "environments": {
+    "source": {
+      "root": "environments"
+    },
+    "dist": {
+      "root": "dist/scripts",
+      "filename": "environment.min.js"
+    }
+  }
+}
