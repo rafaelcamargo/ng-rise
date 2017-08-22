@@ -1,0 +1,3 @@
+window.ENV = {
+  TYPE: 'prod'
+};
