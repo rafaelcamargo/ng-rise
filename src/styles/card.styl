@@ -1,0 +1,22 @@
+@require '_variables'
+@require '_mixins'
+
+$card-padding = 30px
+
+.card
+  padding $card-padding
+  background-color $color-lightest
+  box-shadow 0 1px 2px alpha($color-darkest, .1)
+  border-radius(6px)
+  box-sizing(border-box)
+  .card-title
+    .icon
+      margin-right 10px
+  .divider
+    margin 30px $card-padding * -1
+
+.card-title
+  font-size $font-size-lg
+
+.card-content
+  margin-top 30px

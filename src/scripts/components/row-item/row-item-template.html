@@ -1,0 +1,11 @@
+<div class="row-item {{ $ctrl.cssClass }} {{ $ctrl.sizeCssClass }}">
+  <div class="row-item-label"
+    ng-if="$ctrl.label"
+    ng-bind="$ctrl.label">
+  </div>
+  <div class="row-item-value"
+    ng-if="$ctrl.value"
+    ng-bind="$ctrl.value">
+  </div>
+  <ng-transclude></ng-transclude>
+</div>

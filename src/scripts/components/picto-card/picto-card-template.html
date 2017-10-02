@@ -1,0 +1,16 @@
+<div class="picto-card-container">
+  <div class="picto-card">
+    <ng-card
+      data-title="{{ $ctrl.title }}">
+      <div class="picto-card-bubble-container">
+        <div class="picto-card-bubble">
+          <ng-icon
+            ng-if="$ctrl.icon"
+            data-icon="{{ $ctrl.icon }}">
+          </ng-icon>
+        </div>
+      </div>
+      <ng-transclude></ng-transclude>
+    </ng-card>
+  </div>
+</div>

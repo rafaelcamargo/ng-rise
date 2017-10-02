@@ -1,0 +1,30 @@
+<div class="alert alert-{{ $ctrl.alert.type }} {{ $ctrl.cssClass }}">
+  <span
+    ng-if="$ctrl.alert.message"
+    ng-bind="$ctrl.alert.message"
+    class="alert-message">
+  </span>
+  <button
+    ng-if="$ctrl.alert.retryAction"
+    ng-click="$ctrl.retry()"
+    class="button button-mini">
+    <ng-icon data-icon="ion-android-sync"></ng-icon>
+    <span
+      class="alert-retry-button-text">
+      Retry
+    </span>
+  </button>
+  <button
+    ng-if="$ctrl.alert.customButton"
+    ng-click="$ctrl.customAction()"
+    class="button button-mini">
+    <ng-icon
+      ng-if="$ctrl.alert.customButton.icon"
+      data-icon="{{ $ctrl.alert.customButton.icon }}">
+    </ng-icon>
+    <span
+      ng-bind="$ctrl.alert.customButton.label">
+    </span>
+  </button>
+  <ng-transclude></ng-transclude>
+</div>

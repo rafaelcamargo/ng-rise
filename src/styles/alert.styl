@@ -1,0 +1,53 @@
+@require '_variables'
+@require '_mixins'
+
+alert-content($color, $color-background)
+  background-color $color-background
+  color $color
+  border-left-color $color
+  .button
+    background-color $color
+    border-color $color
+    text-shadow 0 -1px 0 darken($color, 50%)
+    &:hover,
+    &:active
+      background-color alpha($color, .75)
+
+.alert
+  padding 10px
+  border-left-width 2px
+  border-left-style solid
+  box-sizing border-box
+  border-radius(6px)
+  .button
+    margin-left 10px
+    padding-top 2px
+    background-color transparent
+    color $color-lightest
+    border-width 1px
+    .icon
+      margin-right 4px
+      min-width 16px
+      min-height 16px
+      width 16px
+      height 16px
+      font-size $font-size-xs
+      line-height 14px
+  alert-content($color-grey-dark, $color-grey-light)
+  &.alert-success
+    alert-content($color-green, $color-green-light)
+  &.alert-info
+    alert-content($color-blue, $color-blue-light)
+  &.alert-warn
+    alert-content($color-yellow-dark, $color-yellow-light)
+  &.alert-error
+    alert-content($color-red, $color-red-light)
+
+.alert-message
+  position relative
+  top 2px
+  line-height 28px
+
+.alert-retry-button-text
+  position relative
+  top -1px

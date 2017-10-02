@@ -1,0 +1,38 @@
+@require '_variables'
+@require '_mixins'
+
+$picto-card-bubble-size = 64px
+
+.picto-card-container
+  padding-top $picto-card-bubble-size * .5
+
+.picto-card
+  position relative
+  .card-title
+    margin-top 15px
+    text-align center
+
+.picto-card-bubble-container
+  position absolute
+  left 50%
+  top ($picto-card-bubble-size / 2) * -1
+  width $picto-card-bubble-size
+  height $picto-card-bubble-size
+  overflow hidden
+  border-radius(50%)
+  transform('translate(-50%, 0)')
+
+.picto-card-bubble
+  position relative
+  width $picto-card-bubble-size
+  height $picto-card-bubble-size
+  background-color $color-grey
+  .icon
+    position absolute
+    left 50%
+    top 50%
+    color $color-lightest
+    font-size $font-size-xl
+    transform('translate(-50%, -50%)')
+  img
+    width 100%
