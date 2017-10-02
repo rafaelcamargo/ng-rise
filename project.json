@@ -31,7 +31,8 @@
       "files": [
         "node_modules/angular/angular.min.js",
         "node_modules/angular-resource/angular-resource.min.js",
-        "node_modules/angular-ui-router/release/angular-ui-router.min.js"
+        "node_modules/angular-ui-router/release/angular-ui-router.min.js",
+        "node_modules/clipboard/dist/clipboard.min.js"
       ]
     },
     "dist": {
@@ -57,7 +58,8 @@
     },
     "vendor": {
       "files": [
-        "node_modules/ggrid/dist/ggrid.min.css"
+        "node_modules/ggrid/dist/ggrid.min.css",
+        "node_modules/ionicons/css/ionicons.min.css"
       ]
     },
     "dist": {
@@ -75,6 +77,16 @@
     },
     "dist": {
       "root": "dist/images/"
+    }
+  },
+  "fonts": {
+    "vendor": {
+      "files": [
+        "node_modules/ionicons/fonts/*.*"
+      ]
+    },
+    "dist": {
+      "root": "dist/fonts"
     }
   },
   "environments": {

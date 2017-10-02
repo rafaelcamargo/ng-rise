@@ -110,6 +110,11 @@ gulp.task('images', () => {
     .pipe(gulp.dest(project.images.dist.root));
 });
 
+gulp.task('fonts', () => {
+  return gulp.src(project.fonts.vendor.files)
+    .pipe(gulp.dest(project.fonts.dist.root));
+});
+
 gulp.task('index', () => {
   return gulp.src(project.index.source.file)
     .pipe(gulpif(shouldRevise(), revise()))
@@ -157,6 +162,7 @@ gulp.task('build:base',
     'css:lib',
     'css:app',
     'html:templates',
+    'fonts',
     'images',
     'index'
   )
