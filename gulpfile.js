@@ -5,7 +5,7 @@ var fs = require('fs'),
   concat = require('gulp-concat'),
   replace = require('gulp-replace'),
   gulpif = require('gulp-if'),
-  uglify = require('gulp-uglify'),
+  minify = require('gulp-babel-minify'),
   stylus = require('gulp-stylus'),
   cleanCSS = require('gulp-clean-css'),
   sourcemaps = require('gulp-sourcemaps'),
@@ -47,7 +47,7 @@ function revise(){
 gulp.task('js:env', () => {
   const file = `${project.environments.source.root}/${getEnv()}.js`;
   return gulp.src(file)
-    .pipe(uglify({mangle: false}).on('error', gutil.log))
+    .pipe(minify({mangle: false}).on('error', gutil.log))
     .pipe(rename(project.environments.dist.filename))
     .pipe(gulp.dest(project.environments.dist.root));
 });
@@ -62,7 +62,7 @@ gulp.task('js:app', () => {
   return gulp.src(project.scripts.source.files)
     .pipe(gulpif(shouldGenerateSourceMaps(), sourcemaps.init()))
     .pipe(concat(project.scripts.dist.filename))
-    .pipe(gulpif(!isEnvDev(), uglify({mangle: false}).on('error', gutil.log)))
+    .pipe(gulpif(!isEnvDev(), minify({mangle: false}).on('error', gutil.log)))
     .pipe(gulpif(shouldGenerateSourceMaps(), sourcemaps.write()))
     .pipe(gulp.dest(project.scripts.dist.root));
 });
@@ -101,7 +101,7 @@ gulp.task('html:templates', function () {
         return url.replace('/scripts', '');
       }
     }))
-    .pipe(uglify({mangle: false}))
+    .pipe(minify({mangle: false}))
     .pipe(gulp.dest(project.templates.dist.root));
 });
 
