@@ -9,7 +9,7 @@ dependencies:
 
 compile:
   override:
-    - npm run build
+    - npm run build -- --env=prod
 
 test:
   override:
