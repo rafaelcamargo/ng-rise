@@ -1,0 +1,18 @@
+@require '_mixins'
+
+.copiable-value-input-container
+  position relative
+  padding-right 36px
+  box-sizing(border-box)
+  clearfix()
+  input
+    float left
+    width 100%
+    border-radius(6px 0 0 6px)
+  button
+    position absolute
+    top 0
+    right 0
+    border-radius(0 6px 6px 0)
+  .ion-checkmark-round
+    color $color-green

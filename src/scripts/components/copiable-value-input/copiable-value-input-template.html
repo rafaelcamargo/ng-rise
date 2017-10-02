@@ -1,0 +1,9 @@
+<div class="copiable-value-input-container">
+  <input type="text" value="{{ $ctrl.value }}" readonly />
+  <button
+    type="button"
+    data-clipboard-text="{{ $ctrl.value }}"
+    data-clipboard-trigger>
+    <ng-icon data-icon="ion-clipboard"></ng-icon>
+  </button>
+</div>

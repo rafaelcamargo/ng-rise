@@ -1,97 +1,57 @@
-// Karma configuration
-// Generated on Mon Jun 08 2015 11:54:05 GMT-0300 (E. South America Standard Time)
+const fs = require('fs'),
+  argv = require('yargs').argv,
+  project = JSON.parse(fs.readFileSync('./project.json', 'utf8'));
+
+function getEnvironmentFile(){
+  const env = argv.env || 'dev';
+  return `${project.environments.source.root}/${env}.js`;
+}
+
+function getFiles(){
+  return project.scripts.vendor.files
+    .concat(project.scripts.test.vendor.files)
+    .concat([
+      getEnvironmentFile(),
+      project.templates.source.files,
+      project.scripts.source.files[0]
+    ]);
+}
 
 module.exports = function(config) {
-
   config.set({
-
-    // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
-
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
-
-
-    // list of files / patterns to load in the browser
-    files: [
-      'node_modules/angular/angular.min.js',
-      'node_modules/angular-route/angular-route.min.js',
-      'node_modules/angular-mocks/angular-mocks.js',
-      'app/**/*.html',
-      'app/**/*.js',
-      'spec/**/*-spec.js'
-    ],
-
-
-    // list of files to exclude
+    files: getFiles(),
     exclude: [],
-
-    plugins: [
-      'karma-jasmine',
-      'karma-ng-html2js-preprocessor',
-      'karma-phantomjs-launcher',
-      'karma-coverage'
-    ],
-
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'app/**/*-template.html': 'ng-html2js',
-        'app/**/*.js': 'coverage'
+      [project.scripts.test.coverage]: ['coverage'],
+      [project.templates.source.files]: ['ng-html2js']
     },
-
-
+    reporters: ['coverage', 'mocha'],
     ngHtml2JsPreprocessor: {
-      moduleName: 'templates'
+      stripPrefix: 'src/scripts',
+      moduleName: project.templates.source.module.name
     },
-
-
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage'],
-
-
-    coverageReporter: {
-        dir : 'coverage/',
-        reporters: [
-          { type : 'html', subdir: 'report-html' },
-          { type: 'lcov', subdir: 'report-lcov' },
-          { type: 'text', subdir: '.' }
-        ]
-
-    },
-
-
-    // web server port
     port: 9876,
-
-
-    // enable / disable colors in the output (reporters and logs)
     colors: true,
-
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
-
-
-    // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
-
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: [
-      'PhantomJS'
-    ],
-
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    browsers: ['jsdom'],
+    singleRun: true,
+    concurrency: Infinity,
+    coverageReporter: {
+      reporters: [
+        { type: 'html', subdir: 'report-html' },
+        { type: 'lcov', subdir: 'report-lcov' }
+      ],
+      check: {
+        global: {
+          statements: 100,
+          branches: 100,
+          functions: 100,
+          lines: 100
+        }
+      }
+    }
   });
 };

@@ -1,0 +1,18 @@
+@require '_variables'
+@require '_mixins'
+
+.social-networks-items
+  margin 0
+  padding 0
+  list-style-type none
+  clearfix()
+
+.social-networks-item
+  float left
+  &:not(:first-child)
+    margin-left 20px
+  .external-link
+    color $color-grey
+    font-size $font-size-xl
+    &:hover
+      color $color-grey-dark

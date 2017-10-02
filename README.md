@@ -1,46 +1,44 @@
-# ng-rise
-ng-rise is a minimal AngularJS application. Its content has only the minimum conditions to start code an app: *Angular*, *Angular-Route* and automated tasks to watch and update *.js* and *.styl* files.
+# Angular Rise
+This is a minimal AngularJS application used as stater kit for new applications.
 
 [![Code Climate](https://codeclimate.com/github/rafaelcamargo/ng-rise/badges/gpa.svg)](https://codeclimate.com/github/rafaelcamargo/ng-rise) [![Test Coverage](https://codeclimate.com/github/rafaelcamargo/ng-rise/badges/coverage.svg)](https://codeclimate.com/github/rafaelcamargo/ng-rise/coverage) [![CircleCI](https://circleci.com/gh/rafaelcamargo/ng-rise.svg?style=svg)](https://circleci.com/gh/rafaelcamargo/ng-rise)
 
-## Requirements
-To run this project, you need Nodejs installed in your system.
+## Contributing
 
-## Installation
+1. Install [Node](https://nodejs.org/en/). Download the "Recommend for Most Users" version.
 
-```
+2. Clone the repo:
+``` bash
 git clone git@github.com:rafaelcamargo/ng-rise.git
+```
+
+3. Go to the project directory
+``` bash
 cd ng-rise
-npm install -g grunt-cli karma-cli
+```
+
+4. Install the project dependencies
+``` bash
 npm install
-grunt build
-grunt start
-open http://localhost:9000
 ```
 
-## Base structure
+**NOTE:** For speed reasons, we encourage the use of [yarn](https://yarnpkg.com/en/docs/install) over npm.
 
+5. If you want just build the project, run:
+``` bash
+npm run build
 ```
-index.html
-app
-|-- app.js
-|-- routes.js
-|-- commons
-|-- |-- directives
-|-- |-- |-- welcome
-|-- |-- |-- |-- welcome-template.html
-|-- |-- |-- |-- welcome-directive.js
-|-- views
-|-- |-- introduction
-|-- |-- |-- introduction-template.html
-|-- |-- |-- introduction-controller.js
-assets
-|-- styl
-|-- |-- native.styl
-spec
-|-- commons
-|-- |-- directives
-|-- |-- |-- welcome-spec.js
-|-- views
-|-- |-- introduction-spec.js
+
+6. Otherwise, run:
+``` bash
+npm run start
+```
+
+The app will be running on `http://localhost:4000` and the browser will automatically reload with the changes you make in any source file.
+
+## Tests
+
+1. Ensure that all code that you have added is covered with unit tests:
+``` bash
+npm run test
 ```

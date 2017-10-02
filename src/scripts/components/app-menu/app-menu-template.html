@@ -1,0 +1,10 @@
+<div class="app-menu">
+  <ul class="app-menu-items">
+    <li
+      ng-repeat="item in $ctrl.items"
+      class="app-menu-item {{ item.selectedCssClass }}"
+      ng-bind="item.text"
+      ng-click="$ctrl.onItemClick(item)">
+    </li>
+  </ul>
+</div>

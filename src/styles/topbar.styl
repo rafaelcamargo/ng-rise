@@ -1,0 +1,31 @@
+@require '_variables'
+@require '_mixins'
+@require 'viewport'
+
+.topbar
+  background-color $color-lightest
+  border-bottom 1px solid alpha($color-grey, .5)
+
+.topbar-content
+  position relative
+  width $viewport-width
+  max-width $viewport-max-width
+  margin 0 auto
+  clearfix()
+  .logo
+    position absolute
+    top 50%
+    left 0
+    width 180px
+    height 24px
+    background-size 180px 24px
+    background-position left center
+    transform('translate(0,-50%)')
+  .app-menu
+    float right
+
++breakpoint('xs')
+  .topbar-content
+    .logo
+      width 24px
+      height 24px

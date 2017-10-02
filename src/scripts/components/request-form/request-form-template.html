@@ -1,0 +1,13 @@
+<div class="request-form-container">
+  <ng-alert
+    ng-if="$ctrl.alert"
+    data-alert="$ctrl.alert">
+  </ng-alert>
+  <form
+    ng-submit="$ctrl.sendData()"
+    class="request-form {{ $ctrl.loaderCssClass }}"
+    name="{{ $ctrl.name }}">
+    <ng-transclude></ng-transclude>
+    <ng-loader></ng-loader>
+  </form>
+</div>

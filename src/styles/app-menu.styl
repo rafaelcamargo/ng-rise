@@ -1,0 +1,28 @@
+@require '_variables'
+@require '_mixins'
+
+.app-menu-items
+  margin 0
+  padding 0
+  list-style-type none
+  clearfix()
+
+.app-menu-item
+  position relative
+  float left
+  padding 20px 30px
+  color $color-grey
+  cursor pointer
+  box-sizing(border-box)
+  &.app-menu-item-selected
+    color $color-primary
+    &:after
+      position absolute
+      content ' '
+      left 50%
+      bottom -3px
+      width 6px
+      height 6px
+      background-color $color-primary
+      border-radius(50%)
+      transform('translate(-50%,0)')

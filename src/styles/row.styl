@@ -1,0 +1,10 @@
+@require '_mixins'
+@require 'row-item'
+
+ng-row
+  display block
+  & + ng-row
+    margin-top 15px
+.row
+  margin 0 $row-item-padding * -1
+  clearfix()
