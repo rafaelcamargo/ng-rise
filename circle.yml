@@ -4,14 +4,20 @@ machine:
 
 dependencies:
   override:
-    - npm install -g codeclimate-test-reporter
+    - npm install -g firebase-tools codeclimate-test-reporter
     - npm install
 
 compile:
   override:
-    - npm run build
+    - npm run build -- --env=prod
 
 test:
   override:
     - npm run test
     - CODECLIMATE_REPO_TOKEN=4fbf57be01ea6c2c04d468d36dda7ac3b16ad91ac07930edf6b23dfb4bc5acb3 codeclimate-test-reporter < ./coverage/report-lcov/lcov.info
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - firebase deploy --token "$FIREBASE_DEPLOY_TOKEN" --non-interactive
