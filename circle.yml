@@ -14,7 +14,7 @@ compile:
 test:
   override:
     - npm run test
-    - CODECLIMATE_REPO_TOKEN=4fbf57be01ea6c2c04d468d36dda7ac3b16ad91ac07930edf6b23dfb4bc5acb3 codeclimate-test-reporter < ./coverage/report-lcov/lcov.info
+    - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate-test-reporter < ./coverage/report-lcov/lcov.info
 
 deployment:
   master:
