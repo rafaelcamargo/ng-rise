@@ -1,6 +1,6 @@
 window.ENV = {
   TYPE: 'dev',
   FORMSPREE: {
-    BASE_URL: 'http://formspree.io'
+    BASE_URL: 'https://formspree.io'
   }
 };
