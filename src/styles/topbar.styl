@@ -2,9 +2,11 @@
 @require '_mixins'
 @require 'viewport'
 
+$topbar-border-color = alpha($color-grey, .5)
+
 .topbar
   background-color $color-lightest
-  border-bottom 1px solid alpha($color-grey, .5)
+  border-bottom 1px solid $topbar-border-color
 
 .topbar-content
   position relative

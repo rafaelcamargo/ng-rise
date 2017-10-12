@@ -27,25 +27,48 @@
       spyOn($state, 'get');
     }));
 
-    it('should get routes', () => {
+    it('should get all routes', () => {
       routeService.getRoutes();
       expect($state.get).toHaveBeenCalled();
     });
 
-    it('should answer if some route is the current route by its name', () => {
-      $state.current = {
-        name: 'welcome'
-      };
-      expect(routeService.isCurrentRoute('welcome')).toEqual(true);
-      expect(routeService.isCurrentRoute('author')).toEqual(false);
+    it('should check if some route name includes a parent route name', () => {
+      const parentRouteName = 'app.accounts';
+      const notParentRouteName = 'app.coupons';
+      $state.current.name = 'app.accounts.list';
+      expect(routeService.includesRoute(parentRouteName)).toEqual(true);
+      expect(routeService.includesRoute(notParentRouteName)).toEqual(false);
+    });
+
+    it('shold check if route is the current one', () => {
+      const currentRouteName = 'app.accounts.list';
+      const notCurrentRouteName = 'app.coupons';
+      $state.current.name = currentRouteName;
+      expect(routeService.isCurrentRoute(currentRouteName)).toEqual(true);
+      expect(routeService.isCurrentRoute(notCurrentRouteName)).toEqual(false);
     });
 
     it('should go to a specific state', () => {
       const state = 'some.state';
+
+      routeService.go(state);
+      expect($state.go).toHaveBeenCalledWith(state, undefined, undefined);
+    });
+
+    it('should go to a specific state passing params', () => {
+      const state = 'some.state';
       const params = {some: 'param'};
 
       routeService.go(state, params);
-      expect($state.go).toHaveBeenCalledWith(state, params);
+      expect($state.go).toHaveBeenCalledWith(state, params, undefined);
+    });
+
+    it('should go to a specific state passing options', () => {
+      const state = 'some.state';
+      const options = {some: 'option'};
+
+      routeService.go(state, null, options);
+      expect($state.go).toHaveBeenCalledWith(state, null, options);
     });
 
     it('should get url', () => {
@@ -61,13 +84,15 @@
     });
 
     it('should set search params', () => {
-      routeService.setSearchParams({
+      const params = {
         name: 'rafael',
         email: 'some@email.com'
+      };
+      $state.current.name = 'account';
+      routeService.setSearchParams(params);
+      expect($state.go).toHaveBeenCalledWith($state.current.name, params, {
+        notify: false
       });
-      expect($stateParams.name).toEqual('rafael');
-      expect($stateParams.email).toEqual('some@email.com');
-      expect($state.reload).toHaveBeenCalled();
     });
 
     it('should get all route params', () => {

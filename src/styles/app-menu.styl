@@ -1,7 +1,11 @@
 @require '_variables'
 @require '_mixins'
+@require 'topbar'
 
-.app-menu-items
+$app-menu-root-item-hover-color = lighten($color-grey-light, 10%);
+
+.app-menu-items,
+.app-menu-sub-items
   margin 0
   padding 0
   list-style-type none
@@ -10,19 +14,104 @@
 .app-menu-item
   position relative
   float left
-  padding 20px 30px
+  padding 20px
   color $color-grey
   cursor pointer
+  border-width 0 1px
+  border-style solid
+  border-color transparent
   box-sizing(border-box)
-  &.app-menu-item-selected
-    color $color-primary
-    &:after
+  transition(all, 600ms)
+  &:hover
+    background-color $app-menu-root-item-hover-color
+  &:focus,
+  &:active
+    background-color $app-menu-root-item-hover-color
+    border-color $color-grey-semi-light
+    &:before
       position absolute
       content ' '
-      left 50%
-      bottom -3px
-      width 6px
-      height 6px
-      background-color $color-primary
-      border-radius(50%)
-      transform('translate(-50%,0)')
+      bottom -1px
+      right 0
+      width 100%
+      height 1px
+      background-color $app-menu-root-item-hover-color
+      z-index $layer-middle
+    .app-menu-sub-items
+      display block
+  &.app-menu-item-selected
+    & > .app-menu-item-text
+      color $color-primary
+    &:focus,
+    &:active
+      &:after
+        opacity 0
+    &:after
+      opacity 1
+    .icon
+      color $color-primary
+  &:after
+    position absolute
+    content ' '
+    left 50%
+    bottom -4px
+    width 6px
+    height 6px
+    background-color $color-primary
+    border-radius 50%
+    opacity 0
+    z-index $layer-high
+    transform('translate(-50%,0)')
+    transition(all, 600ms)
+  .icon
+    position relative
+    top -2px
+    margin-right 10px
+    width 16px
+    height 16px
+    min-width 16px
+    min-height 16px
+    color $color-grey-semi-dark
+    font-size $font-size-md
+
+.app-menu-item,
+.app-menu-sub-item
+  &:hover,
+  &:focus,
+  &:active
+    outline 0
+
+.app-menu-sub-items
+  display none
+  position absolute
+  top 100%
+  right -1px
+  min-width 150px
+  background-color $app-menu-root-item-hover-color
+  border-radius 0 0 6px 6px
+  border-color $topbar-border-color
+  border-style solid
+  border-width 0 1px 1px
+  z-index $topbar-layer
+
+.app-menu-sub-item
+  padding 15px 20px
+  text-align right
+  white-space nowrap
+  transition(all, 600ms)
+  &:not(:first-child)
+    border-top 1px solid $color-lightest
+  &:not(:last-child)
+    border-bottom 1px solid $color-grey-semi-light
+  &:hover
+    background-color $color-lightest
+    color $color-darkest
+  &.app-menu-sub-item-selected
+    color $color-primary
+
++breakpoint('xs')
+  .app-menu-item
+    .icon
+      margin-right 0
+  .app-menu-item-text
+    display none

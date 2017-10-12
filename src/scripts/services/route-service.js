@@ -1,7 +1,7 @@
 (function (){
   'use strict';
 
-  const routeService = ($window, $location, $state, $stateParams) => {
+  function routeService($window, $location, $state, $stateParams){
 
     const _public = {};
 
@@ -13,8 +13,12 @@
       return routeName === $state.current.name;
     };
 
-    _public.go = (state, params) => {
-      $state.go(state, params);
+    _public.includesRoute = routeName => {
+      return $state.current.name.includes(routeName);
+    };
+
+    _public.go = (state, params, options) => {
+      return $state.go(state, params, options);
     };
 
     _public.url = url => {
@@ -30,14 +34,14 @@
       return $stateParams;
     };
 
-    _public.setSearchParams = (params, avoidStateReload) => {
-      for (const property in params)
-        $stateParams[property] = params[property];
-      $state.reload();
+    _public.setSearchParams = params => {
+      return _public.go($state.current.name, params, {
+        notify: false
+      });
     };
 
     return _public;
-  };
+  }
 
   angular.module('app').factory('routeService', [
     '$window',

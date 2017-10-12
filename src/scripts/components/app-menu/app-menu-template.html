@@ -3,8 +3,26 @@
     <li
       ng-repeat="item in $ctrl.items"
       class="app-menu-item {{ item.selectedCssClass }}"
-      ng-bind="item.text"
       ng-click="$ctrl.onItemClick(item)">
+      <nr-icon
+        ng-if="item.icon"
+        data-icon="{{ item.icon }}">
+      </nr-icon>
+      <span
+        class="app-menu-item-text"
+        ng-bind="item.text">
+      </span>
+      <ul class="app-menu-sub-items">
+        <li
+          ng-repeat="subItem in item.nest"
+          class="app-menu-sub-item {{ subItem.selectedCssClass }}"
+          ng-click="$ctrl.onItemClick(subItem)">
+          <span
+            class="app-menu-sub-item-text"
+            ng-bind="subItem.text">
+          </span>
+        </li>
+      </ul>
     </li>
   </ul>
 </div>
