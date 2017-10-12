@@ -1,7 +1,7 @@
 (function (){
   'use strict';
 
-  describe('Request Form', () => {
+  describe('Form', () => {
     const mock = angular.mock;
     const functionMock = () => {};
     const responseMock = {
