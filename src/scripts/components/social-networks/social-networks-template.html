@@ -2,11 +2,11 @@
   <ul class="social-networks-items">
     <li ng-repeat="network in $ctrl.networks"
       class="social-networks-item">
-      <ng-external-link
+      <nr-external-link
         data-icon="{{ network.icon }}"
         data-text="{{ network.text }}"
         data-url="{{ network.url }}">
-      </ng-external-link>
+      </nr-external-link>
     </li>
   </ul>
 </div>

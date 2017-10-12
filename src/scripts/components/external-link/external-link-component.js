@@ -32,6 +32,6 @@
     }
   };
 
-  angular.module('app').component('ngExternalLink', externalLinkComponent);
+  angular.module('app').component('nrExternalLink', externalLinkComponent);
 
 }());

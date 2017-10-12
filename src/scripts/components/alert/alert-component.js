@@ -24,6 +24,6 @@
     }
   };
 
-  angular.module('app').component('ngAlert', alertComponent);
+  angular.module('app').component('nrAlert', alertComponent);
 
 }());

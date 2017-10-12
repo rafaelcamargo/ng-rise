@@ -5,6 +5,6 @@
     templateUrl: '/components/topbar/topbar-template.html'
   };
 
-  angular.module('app').component('ngTopbar', topbarComponent);
+  angular.module('app').component('nrTopbar', topbarComponent);
 
 }());

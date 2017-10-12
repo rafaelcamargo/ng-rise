@@ -13,7 +13,7 @@
       $componentController = $injector.get('$componentController');
 
       instatiateController = bindings => {
-        controller = $componentController('ngRowItem', {}, bindings);
+        controller = $componentController('nrRowItem', {}, bindings);
       }
     }));
 

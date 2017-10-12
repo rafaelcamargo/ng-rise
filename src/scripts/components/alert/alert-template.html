@@ -8,7 +8,7 @@
     ng-if="$ctrl.alert.retryAction"
     ng-click="$ctrl.retry()"
     class="button button-mini">
-    <ng-icon data-icon="ion-android-sync"></ng-icon>
+    <nr-icon data-icon="ion-android-sync"></nr-icon>
     <span
       class="alert-retry-button-text">
       Retry
@@ -18,10 +18,10 @@
     ng-if="$ctrl.alert.customButton"
     ng-click="$ctrl.customAction()"
     class="button button-mini">
-    <ng-icon
+    <nr-icon
       ng-if="$ctrl.alert.customButton.icon"
       data-icon="{{ $ctrl.alert.customButton.icon }}">
-    </ng-icon>
+    </nr-icon>
     <span
       ng-bind="$ctrl.alert.customButton.label">
     </span>

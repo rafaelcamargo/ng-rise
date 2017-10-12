@@ -20,7 +20,7 @@
         }
       };
 
-      controller = $componentController('ngAuthorContactForm', {}, bindingsMock);
+      controller = $componentController('nrAuthorContactForm', {}, bindingsMock);
 
       spyOn(contactsResource, 'save');
       spyOn(bindingsMock.formCtrl, 'reset');

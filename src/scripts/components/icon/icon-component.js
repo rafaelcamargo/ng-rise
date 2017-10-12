@@ -9,6 +9,6 @@
     }
   };
 
-  angular.module('app').component('ngIcon', iconComponent);
+  angular.module('app').component('nrIcon', iconComponent);
 
 }());

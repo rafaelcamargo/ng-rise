@@ -1,5 +1,5 @@
 <div class="author-contact-form">
-  <ng-request-form
+  <nr-form
     data-name="authorContactForm"
     data-submit="$ctrl.submit"
     data-submit-success="$ctrl.onSubmitSuccess"
@@ -7,38 +7,38 @@
     data-alert="$ctrl.alert"
     data-bind-ctrl="true"
     data-ctrl="$ctrl.formCtrl">
-    <ng-row>
-      <ng-row-item
+    <nr-row>
+      <nr-row-item
         data-size="12"
         data-label="Name">
         <input type="text" ng-model="$ctrl.name" required />
-      </ng-row-item>
-    </ng-row>
-    <ng-row>
-      <ng-row-item
+      </nr-row-item>
+    </nr-row>
+    <nr-row>
+      <nr-row-item
         data-size="12"
         data-label="Email">
         <input type="email" ng-model="$ctrl.email" required />
-      </ng-row-item>
-    </ng-row>
-    <ng-row>
-      <ng-row-item
+      </nr-row-item>
+    </nr-row>
+    <nr-row>
+      <nr-row-item
         data-size="12"
         data-label="Message">
         <textarea ng-model="$ctrl.message" required></textarea>
-      </ng-row-item>
-    </ng-row>
-    <ng-row>
-      <ng-row-item
+      </nr-row-item>
+    </nr-row>
+    <nr-row>
+      <nr-row-item
         data-size="6">
         <button type="submit" class="button button-primary">
           Send
         </button>
-      </ng-row-item>
-      <ng-row-item
+      </nr-row-item>
+      <nr-row-item
         data-size="6">
-        <ng-author-social-networks></ng-author-social-networks>
-      </ng-row-item>
-    </ng-row>
-  </ng-request-form>
+        <nr-author-social-networks></nr-author-social-networks>
+      </nr-row-item>
+    </nr-row>
+  </nr-form>
 </div>

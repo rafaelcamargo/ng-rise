@@ -10,6 +10,6 @@
     }
   };
 
-  angular.module('app').component('ngPictoCard', pictoCardComponent);
+  angular.module('app').component('nrPictoCard', pictoCardComponent);
 
 }());

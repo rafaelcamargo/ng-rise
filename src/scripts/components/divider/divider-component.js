@@ -5,6 +5,6 @@
     templateUrl: '/components/divider/divider-template.html'
   };
 
-  angular.module('app').component('ngDivider', dividerComponent);
+  angular.module('app').component('nrDivider', dividerComponent);
 
 }());

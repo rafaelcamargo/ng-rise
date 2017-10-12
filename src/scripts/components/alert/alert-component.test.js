@@ -22,7 +22,7 @@
       };
 
       instantiateController = bindings => {
-        controller = $componentController('ngAlert', {}, bindings);
+        controller = $componentController('nrAlert', {}, bindings);
       };
     }));
 

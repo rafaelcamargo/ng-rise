@@ -5,6 +5,6 @@
     templateUrl: '/components/credits/credits-template.html'
   };
 
-  angular.module('app').component('ngCredits', creditsComponent);
+  angular.module('app').component('nrCredits', creditsComponent);
 
 }());

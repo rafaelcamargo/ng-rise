@@ -13,7 +13,7 @@
       routeService = $injector.get('routeService');
       $componentController = $injector.get('$componentController');
 
-      controller = $componentController('ngAppMenu');
+      controller = $componentController('nrAppMenu');
 
       spyOn(routeService, 'go');
       spyOn(routeService, 'isCurrentRoute').and.callFake(routeName => {

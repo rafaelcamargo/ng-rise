@@ -54,6 +54,6 @@
     ]
   };
 
-  angular.module('app').component('ngAuthorContactForm', authorContactFormComponent);
+  angular.module('app').component('nrAuthorContactForm', authorContactFormComponent);
 
 }());

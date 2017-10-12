@@ -5,6 +5,6 @@
     templateUrl: '/components/loader/loader-template.html'
   };
 
-  angular.module('app').component('ngLoader', loaderComponent);
+  angular.module('app').component('nrLoader', loaderComponent);
 
 }());

@@ -29,6 +29,6 @@
     controller: authorSocialNetworksController
   };
 
-  angular.module('app').component('ngAuthorSocialNetworks', authorSocialNetworksComponent);
+  angular.module('app').component('nrAuthorSocialNetworks', authorSocialNetworksComponent);
 
 }());

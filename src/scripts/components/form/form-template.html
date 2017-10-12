@@ -1,13 +1,13 @@
-<div class="request-form-container">
-  <ng-alert
+<div class="form-container">
+  <nr-alert
     ng-if="$ctrl.alert"
     data-alert="$ctrl.alert">
-  </ng-alert>
+  </nr-alert>
   <form
     ng-submit="$ctrl.sendData()"
-    class="request-form {{ $ctrl.loaderCssClass }}"
+    class="form {{ $ctrl.loaderCssClass }}"
     name="{{ $ctrl.name }}">
     <ng-transclude></ng-transclude>
-    <ng-loader></ng-loader>
+    <nr-loader></nr-loader>
   </form>
 </div>

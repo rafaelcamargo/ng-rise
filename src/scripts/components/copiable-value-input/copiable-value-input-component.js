@@ -44,7 +44,7 @@
     }
   };
 
-  angular.module('app').component('ngCopiableValueInput',
+  angular.module('app').component('nrCopiableValueInput',
     copiableValueInputComponent);
 
 }());

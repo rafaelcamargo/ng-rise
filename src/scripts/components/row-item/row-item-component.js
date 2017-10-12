@@ -25,6 +25,6 @@
     }
   };
 
-  angular.module('app').component('ngRowItem', rowItemComponent);
+  angular.module('app').component('nrRowItem', rowItemComponent);
 
 }());

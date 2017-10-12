@@ -1,8 +1,8 @@
 (function (){
   'use strict';
 
-  function requestFormController ($scope) {
-    const LOADER_CSS_CLASS = 'request-form-loading';
+  function formController ($scope) {
+    const LOADER_CSS_CLASS = 'form-loading';
 
     const _public = this;
 
@@ -87,11 +87,11 @@
   }
 
   const requestFormComponent = {
-    templateUrl: '/components/request-form/request-form-template.html',
+    templateUrl: '/components/form/form-template.html',
     transclude: true,
     controller: [
       '$scope',
-      requestFormController
+      formController
     ],
     bindings: {
       fetch: '<',
@@ -107,6 +107,6 @@
     }
   };
 
-  angular.module('app').component('ngRequestForm', requestFormComponent);
+  angular.module('app').component('nrForm', requestFormComponent);
 
 }());

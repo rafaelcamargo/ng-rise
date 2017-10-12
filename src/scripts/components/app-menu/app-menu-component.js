@@ -50,6 +50,6 @@
     ]
   };
 
-  angular.module('app').component('ngAppMenu', appMenuComponent);
+  angular.module('app').component('nrAppMenu', appMenuComponent);
 
 }());

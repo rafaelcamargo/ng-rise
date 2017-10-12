@@ -9,6 +9,6 @@
     }
   };
 
-  angular.module('app').component('ngRow', rowComponent);
+  angular.module('app').component('nrRow', rowComponent);
 
 }());

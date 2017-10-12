@@ -11,7 +11,7 @@
     beforeEach(mock.inject($injector => {
       $componentController = $injector.get('$componentController');
 
-      controller = $componentController('ngAuthorSocialNetworks');
+      controller = $componentController('nrAuthorSocialNetworks');
     }));
 
     it('should set author social networks', () => {

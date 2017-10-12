@@ -10,6 +10,6 @@
     }
   };
 
-  angular.module('app').component('ngCard', cardComponent);
+  angular.module('app').component('nrCard', cardComponent);
 
 }());

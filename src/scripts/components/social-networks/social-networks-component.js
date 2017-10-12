@@ -8,6 +8,6 @@
     }
   };
 
-  angular.module('app').component('ngSocialNetworks', socialNetworksComponent);
+  angular.module('app').component('nrSocialNetworks', socialNetworksComponent);
 
 }());

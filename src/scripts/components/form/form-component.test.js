@@ -58,7 +58,7 @@
 
       instatiateController = bindings => {
         bindings = bindings || bindingsMock;
-        controller = $componentController('ngRequestForm', {
+        controller = $componentController('nrForm', {
           $scope
         }, bindings);
       };
@@ -95,7 +95,7 @@
       instatiateController();
       stubFormAction('submit', 'success', true, true);
       controller.sendData();
-      expect(controller.loaderCssClass).toEqual('request-form-loading');
+      expect(controller.loaderCssClass).toEqual('form-loading');
     });
 
     it('should clear loader css class when form submit completes', () => {

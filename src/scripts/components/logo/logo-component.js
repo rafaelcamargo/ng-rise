@@ -5,6 +5,6 @@
     templateUrl: '/components/logo/logo-template.html'
   };
 
-  angular.module('app').component('ngLogo', logoComponent);
+  angular.module('app').component('nrLogo', logoComponent);
 
 }());

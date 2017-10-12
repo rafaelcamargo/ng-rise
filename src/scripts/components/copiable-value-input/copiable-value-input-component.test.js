@@ -17,7 +17,7 @@
       $timeout = $injector.get('$timeout');
       $componentController = $injector.get('$componentController');
 
-      controller = $componentController('ngCopiableValueInput');
+      controller = $componentController('nrCopiableValueInput');
 
       mockButton = () => {
         return angular.element('<button><i></i></button>');

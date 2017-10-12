@@ -5,6 +5,6 @@
     templateUrl: '/components/welcome-picto-card/welcome-picto-card-template.html'
   };
 
-  angular.module('app').component('ngWelcomePictoCard', welcomePictoCardcardComponent);
+  angular.module('app').component('nrWelcomePictoCard', welcomePictoCardcardComponent);
 
 }());

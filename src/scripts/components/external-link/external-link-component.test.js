@@ -22,7 +22,7 @@
 
       instantiateController = bindings => {
         bindings = bindings || bindingsMock;
-        controller = $componentController('ngExternalLink', {}, bindings);
+        controller = $componentController('nrExternalLink', {}, bindings);
       };
 
       spyOn(routeService, 'url');

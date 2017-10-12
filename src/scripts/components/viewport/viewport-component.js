@@ -6,6 +6,6 @@
     transclude: true
   };
 
-  angular.module('app').component('ngViewport', viewportComponent);
+  angular.module('app').component('nrViewport', viewportComponent);
 
 }());
