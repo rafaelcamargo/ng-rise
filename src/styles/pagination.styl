@@ -1,0 +1,28 @@
+@require '_variables'
+
+.pagination-container
+  padding 20px 0
+  text-align center
+  .button
+    position relative
+    top 4px
+    &:disabled
+      opacity .5
+  .pagination-custom-navigation-input
+    max-width 40px
+    background-color transparent
+    text-align right
+    border-width 1px
+    border-style solid
+    border-color transparent
+    &:hover,
+    &:focus
+      border-color $color-grey-semi-dark
+      outline 0
+
+.pagination-custom-navigation-container
+  padding 0 20px
+  display inline-block
+
+.pagination-container-next-button
+  margin-left 25px

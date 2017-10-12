@@ -1,0 +1,27 @@
+<div
+  ng-if="$ctrl.shouldShowPagination"
+  class="pagination-container">
+  <button
+    class="button button-circled pagination-container-previous-button"
+    ng-click="$ctrl.querySiblingPage('previous')"
+    ng-disabled="$ctrl.shouldDisablePreviousButton">
+    <nr-icon data-icon="ion-ios-arrow-back"></nr-icon>
+  </button>
+  <div class="pagination-custom-navigation-container">
+    <form ng-submit="$ctrl.queryPage($ctrl.pagination.currentPage)">
+      <input
+        type="text"
+        ng-model="$ctrl.pagination.currentPage"
+        class="pagination-custom-navigation-input"
+        ui-number-mask="0" />
+      de
+      <span ng-bind="$ctrl.numOfTotalPages"></span>
+    </form>
+  </div>
+  <button
+    class="button button-circled pagination-container-next-button"
+    ng-click="$ctrl.querySiblingPage('next')"
+    ng-disabled="$ctrl.shouldDisableNextButton">
+    <nr-icon data-icon="ion-ios-arrow-forward"></nr-icon>
+  </button>
+</div>

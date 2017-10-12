@@ -1,0 +1,49 @@
+<div class="list {{ $ctrl.cssClass }} {{ $ctrl.itemDividersCssClass }} {{ $ctrl.loadingCssClass }}">
+  <nr-row
+    ng-if="$ctrl.shouldShowListHeader"
+    data-css-class="list-header">
+    <nr-row-item
+      data-size="6">
+      <button
+        ng-if="$ctrl.shouldShowNewItemButton"
+        ng-click="$ctrl.onNewItemButtonClick()"
+        class="button-primary"
+        ng-bind="$ctrl.newItemButtonText">
+      </button>
+    </nr-row-item>
+    <nr-row-item
+      ng-if="$ctrl.shouldShowFilter"
+      data-size="6"
+      data-css-class="list-filter-row-item">
+      <input
+        type="text"
+        ng-model="$ctrl.filterValue"
+        placeholder="{{ $ctrl.filterPlaceholder }}">
+      <button
+        type="button"
+        ng-click="$ctrl.filter()">
+        <nr-icon data-icon="ion-android-search"></nr-icon>
+      </button>
+    </nr-row-item>
+  </nr-row>
+  <div class="list-body">
+    <nr-loader
+      ng-if="$ctrl.shouldShowLoader"
+      data-css-class="list-loader">
+    </nr-loader>
+    <nr-alert
+      ng-if="$ctrl.alert"
+      data-alert="$ctrl.alert"
+      data-css-class="list-alert">
+    </nr-alert>
+    <div class="list-content">
+      <ng-transclude></ng-transclude>
+    </div>
+  </div>
+  <nr-pagination
+    ng-if="$ctrl.pagination"
+    data-pagination="$ctrl.pagination"
+    data-current-page-search-param="$ctrl.currentPageSearchParam"
+    data-query-action="$ctrl.queryList">
+  </nr-pagination>
+</div>
