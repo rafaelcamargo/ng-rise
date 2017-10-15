@@ -8,14 +8,16 @@
         url: '/',
         templateUrl: '/views/welcome/welcome-template.html',
         appMenuItem: {
-          text: 'Welcome'
+          text: 'Welcome',
+          icon: 'ion-home'
         }
       })
       .state('author', {
         url: '/author',
         templateUrl: '/views/author/author-template.html',
         appMenuItem: {
-          text: 'Author'
+          text: 'Author',
+          icon: 'ion-person'
         }
       });
 
