@@ -1,4 +1,15 @@
-JavaScript: true
+engines:
+  eslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript:
+
+ratings:
+  paths:
+  - src/**.js
 
 exclude_paths:
-- "**.test.js"
+- "src/**.test.js"
