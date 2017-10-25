@@ -1,0 +1,15 @@
+@require '_variables'
+@require '_mixins'
+
+nr-list-item
+  display block
+  &:focus
+    outline 0
+  &:not(:first-child)
+    border-top 1px solid $color-grey-semi-light
+
+.list-item
+  padding 10px
+  clearfix()
+  &:focus
+    outline 0

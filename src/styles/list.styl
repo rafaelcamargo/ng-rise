@@ -1,0 +1,38 @@
+@require '_variables'
+@require '_mixins'
+
+.list
+  overflow hidden
+  &.list-loading
+    .list-content
+      opacity 0.25
+  &.list-item-dividers-hidden
+    nr-list-item
+      border 0
+      &:not(:first-child)
+        border 0
+    .list-item-detail
+      padding 7px 10px
+  &.list-hoverable-items
+    .list-item
+      &:hover,
+      &:active
+        background-color $color-grey-light
+        cursor pointer
+  .list-loader
+    position absolute
+    top 50%
+    left 50%
+    transform('translate(-50%,-50%)')
+  .list-header
+    margin-bottom 30px
+    .row-item
+      min-height 1px
+  .list-body
+    position relative
+    min-height 50px
+  .pagination-container
+    margin-top 20px
+  nr-alert
+    & ~ .list-content
+      margin-top 30px
