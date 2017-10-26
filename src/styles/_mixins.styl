@@ -3,6 +3,10 @@
 background-image($filename, $path = $path-images)
   background-image url($path + $filename + '?@@fingerprint')
 
+backdrop-filter($filter)
+  -webkit-backdrop-filter unquote($filter)
+  backdrop-filter         unquote($filter)
+
 border-radius($radius)
   -webkit-border-radius $radius
   -moz-border-radius    $radius
