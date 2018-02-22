@@ -19,6 +19,14 @@
           text: 'Author',
           icon: 'ion-person'
         }
+      })
+      .state('feedback', {
+        url: '/feedback',
+        templateUrl: '/views/feedback/feedback-template.html',
+        appMenuItem: {
+          text: 'Feedback',
+          icon: 'ion-ios-chatbubble'
+        }
       });
 
     $urlRouterProvider.otherwise('/');
