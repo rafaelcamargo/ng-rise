@@ -1,0 +1,36 @@
+<div class="feedback-form">
+  <nr-form
+    data-name="feedbackForm"
+    data-submit="$ctrl.submit"
+    data-submit-success="$ctrl.submitSuccess"
+    data-submit-success-message="Nice! Thanks for your feedback ;)">
+    <nr-row>
+      <nr-row-item
+        data-size="12"
+        data-label="How long you work as software developer?">
+        <input type="text" ng-model="$ctrl.experience" />
+      </nr-row-item>
+    </nr-row>
+    <nr-row>
+      <nr-row-item
+        data-size="12"
+        data-label="What is your opinion about Component-Based Architecture?">
+        <input type="text" ng-model="$ctrl.opinion" />
+      </nr-row-item>
+    </nr-row>
+    <nr-row>
+      <nr-row-item
+        data-size="12"
+        data-label="Know a greater architecture or have you noticed anything that could be better here?">
+        <input type="text" ng-model="$ctrl.suggestions" />
+      </nr-row-item>
+    </nr-row>
+    <nr-row>
+      <nr-row-item>
+        <button type="submit">
+          Send
+        </button>
+      </nr-row-item>
+    </nr-row>
+  </nr-form>
+</div>
