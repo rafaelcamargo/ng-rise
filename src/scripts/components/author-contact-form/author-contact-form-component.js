@@ -4,9 +4,6 @@
   function authorContactFormController(contactsResource){
     const _public = this;
 
-    const SUBMIT_SUCESS_MESSAGE = 'Message successfully sent. Thank you!';
-    const SUBMIT_ERROR_MESSAGE = 'Something went wrong. Please, try again';
-
     _public.submit = () => {
       return contactsResource.save({
         emailAddress: 'hello@rafaelcamargo.com'
@@ -14,17 +11,11 @@
         name: _public.name,
         email: _public.email,
         message: _public.message
-      });
+      }).$promise;
     };
 
     _public.onSubmitSuccess = () => {
-      setAlert('success', SUBMIT_SUCESS_MESSAGE);
       clearFields();
-      resetForm();
-    };
-
-    _public.onSubmitError = () => {
-      setAlert('error', SUBMIT_ERROR_MESSAGE, _public.formCtrl.sendData);
     };
 
     const clearFields = () => {
@@ -32,18 +23,6 @@
       _public.email = '';
       _public.message = '';
     }
-
-    const resetForm = () => {
-      _public.formCtrl.reset();
-    };
-
-    const setAlert = (type, message, retryAction) => {
-      _public.alert = {
-        type,
-        message,
-        retryAction
-      };
-    };
   }
 
   const authorContactFormComponent = {

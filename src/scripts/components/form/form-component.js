@@ -3,12 +3,12 @@
 
   function formController ($scope) {
     const LOADER_CSS_CLASS = 'form-loading';
+    const SUBMIT_SUCCESS_MESSAGE = 'Success!';
+    const SUBMIT_ERROR_MESSAGE = 'Something went wrong. Please, try again';
 
     const _public = this;
 
     _public.$onInit = () => {
-      if (_public.bindCtrl)
-        _public.ctrl = _public;
       if (shouldFetchData())
         _public.fetchData();
     };
@@ -17,7 +17,8 @@
       request({
         action: _public.submit,
         success: _public.submitSuccess,
-        error: _public.submitError
+        error: _public.submitError,
+        retryAction: _public.sendData
       });
     };
 
@@ -25,22 +26,59 @@
       request({
         action: _public.fetch,
         success: _public.fetchSuccess,
-        error: _public.fetchError
+        error: _public.fetchError,
+        retryAction: _public.fetchData
       });
     };
 
-    _public.highlightErrorFields = () => {
-      const form = getFormModel();
+    const shouldFetchData = () => {
+      return _public.fetch
+    };
 
-      angular.forEach(form.$error, errorFields => {
-        for (let i=0; i < errorFields.length; i++)
-          errorFields[i].$setDirty();
+    const clearAlert = () => {
+      delete _public.alert;
+    };
+
+    const setLoaderCssClass = cssClass => {
+      _public.loaderCssClass = cssClass;
+    };
+
+    const request = options => {
+      clearAlert();
+      setLoaderCssClass(LOADER_CSS_CLASS);
+      options.action().then(response => {
+        onRequestSuccess(options.success, response)
+      }, err => {
+        onRequestError(options.error, err, options.retryAction)
       });
     };
 
-    _public.reset = () => {
-      const form = getFormModel();
+    const onRequestSuccess = (successCallback, response) => {
+      setAlert('success', getSubmitSuccessMessage());
+      successCallback(response);
+      onRequestComplete();
+      resetForm();
+    };
 
+    const getSubmitSuccessMessage = () => {
+      const customMsg = _public.submitSuccessMessage;
+      return customMsg ? customMsg : SUBMIT_SUCCESS_MESSAGE;
+    };
+
+    const onRequestError = (errorCallback, err, retryAction) => {
+      if(errorCallback)
+        errorCallback(err);
+      else
+        setAlert('error', SUBMIT_ERROR_MESSAGE, retryAction);
+      onRequestComplete();
+    };
+
+    const onRequestComplete = () => {
+      setLoaderCssClass('');
+    };
+
+    const resetForm = () => {
+      const form = getFormModel();
       form.$setPristine();
       form.$setUntouched();
     };
@@ -49,40 +87,12 @@
       return $scope[_public.name];
     };
 
-    const shouldFetchData = () => {
-      return _public.fetch
-    };
-
-    const clearAlert = () => {
-      _public.alert = null;
-    };
-
-    const setLoaderCssClass = cssClass => {
-      _public.loaderCssClass = cssClass;
-    };
-
-    const clearLoaderCssClass = () => {
-      setLoaderCssClass('');
-    };
-
-    const onRequestComplete = () => {
-      clearLoaderCssClass();
-    };
-
-    const request = options => {
-      const request = options.action();
-
-      if (request && request.$promise){
-        clearAlert();
-        setLoaderCssClass(LOADER_CSS_CLASS);
-        request.$promise.then(response => {
-          onRequestComplete();
-          options.success(response);
-        }, error => {
-          onRequestComplete();
-          options.error(error);
-        });
-      }
+    const setAlert = (type, message, retryAction) => {
+      _public.alert = {
+        type,
+        message,
+        retryAction
+      };
     };
   }
 
@@ -99,8 +109,8 @@
       fetchError: '<',
       submit: '<',
       submitSuccess: '<',
+      submitSuccessMessage: '@',
       submitError: '<',
-      alert: '=',
       name: '@',
       bindCtrl: '=',
       ctrl: '='

@@ -3,6 +3,7 @@
     <li
       ng-repeat="item in $ctrl.items"
       class="app-menu-item {{ item.selectedCssClass }}"
+      ng-class="{ 'app-menu-item-open': item.shouldShowSubItems }"
       ng-click="$ctrl.onItemClick(item)">
       <nr-icon
         ng-if="item.icon"
@@ -16,7 +17,7 @@
         <li
           ng-repeat="subItem in item.nest"
           class="app-menu-sub-item {{ subItem.selectedCssClass }}"
-          ng-click="$ctrl.onItemClick(subItem)">
+          ng-click="$ctrl.onSubItemClick($event, subItem)">
           <span
             class="app-menu-sub-item-text"
             ng-bind="subItem.text">

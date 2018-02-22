@@ -5,6 +5,7 @@
     const mock = angular.mock;
     let $componentController,
       $rootScope,
+      $eventMock,
       controller,
       routeService,
       routesMock,
@@ -53,7 +54,16 @@
           parentName: 'coupons',
           text: 'Lista de Cupons'
         }
+      }, {
+        name: 'finance',
+        appMenuItem: {
+          text: 'Financeiro'
+        }
       }];
+
+      $eventMock = {
+        stopImmediatePropagation: jasmine.createSpy()
+      };
 
       stubRouteServiceMethod = (method, mockedRouteName) => {
         spyOn(routeService, method).and.callFake(routeName => {
@@ -97,6 +107,10 @@
           routeName: 'coupons.list',
           selectedCssClass: ''
         }]
+      }, {
+        text: 'Financeiro',
+        routeName: 'finance',
+        selectedCssClass: ''
       }]);
     });
 
@@ -124,7 +138,7 @@
       expect(routeService.go).not.toHaveBeenCalled();
     });
 
-    it('should set nested item as selected when nested item route is the current rout', () => {
+    it('should set nested item as selected when nested item route is the current route', () => {
       stubRouteServiceMethod('isCurrentRoute', 'accounts.list');
       controller.$onInit();
       expect(controller.items[0].nest[0].selectedCssClass).toEqual('app-menu-sub-item-selected');
@@ -137,6 +151,49 @@
       stubRouteServiceMethod('isCurrentRoute', 'coupons.list');
       $rootScope.$broadcast('$stateChangeSuccess', controller.items);
       expect(controller.items[1].nest[0].selectedCssClass).toEqual('app-menu-sub-item-selected');
+    });
+
+    it('should toggle sub items visibility on item click when item has sub items', () => {
+      controller.$onInit();
+      const item = controller.items[0];
+      controller.onItemClick(item);
+      expect(item.shouldShowSubItems).toEqual(true);
+      controller.onItemClick(item);
+      expect(item.shouldShowSubItems).toEqual(false);
+    });
+
+    it('should not toggle sub items visibility on item click when item has no sub items', () => {
+      controller.$onInit();
+      const item = controller.items[2];
+      controller.onItemClick(item);
+      expect(item.shouldShowSubItems).toEqual(false);
+      controller.onItemClick(item);
+      expect(item.shouldShowSubItems).toEqual(false);
+    });
+
+    it('should stop immediate propagation on sub item click', () => {
+      controller.$onInit();
+      const subItem = controller.items[0].nest[0];
+      controller.onSubItemClick($eventMock, subItem);
+      expect($eventMock.stopImmediatePropagation).toHaveBeenCalled();
+    });
+
+    it('should go to a sub item route on sub item click', () => {
+      controller.$onInit();
+      const subItem = controller.items[0].nest[0];
+      controller.onSubItemClick($eventMock, subItem);
+      expect(routeService.go).toHaveBeenCalledWith('accounts.list');
+    });
+
+    it('should hide all sub items on sub item click', () => {
+      controller.$onInit();
+      const item = controller.items[0];
+      const subItem = item.nest[0];
+      item.shouldShowSubItems = true;
+      controller.onSubItemClick($eventMock, subItem);
+      expect(controller.items[0].shouldShowSubItems).toEqual(false);
+      expect(controller.items[1].shouldShowSubItems).toEqual(false);
+      expect(controller.items[2].shouldShowSubItems).toEqual(false);
     });
 
   });
