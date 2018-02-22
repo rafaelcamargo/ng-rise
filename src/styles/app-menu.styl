@@ -22,12 +22,7 @@ $app-menu-root-item-hover-color = lighten($color-grey-light, 10%);
   border-color transparent
   box-sizing(border-box)
   transition(all, 600ms)
-  &:hover
-    background-color $app-menu-root-item-hover-color
-  &:focus,
-  &:active
-    background-color $app-menu-root-item-hover-color
-    border-color $color-grey-semi-light
+  &.app-menu-item-open
     &:before
       position absolute
       content ' '
@@ -35,15 +30,13 @@ $app-menu-root-item-hover-color = lighten($color-grey-light, 10%);
       right 0
       width 100%
       height 1px
-      background-color $app-menu-root-item-hover-color
       z-index $layer-middle
     .app-menu-sub-items
       display block
   &.app-menu-item-selected
     & > .app-menu-item-text
       color $color-primary
-    &:focus,
-    &:active
+    &.app-menu-item-open
       &:after
         opacity 0
     &:after
@@ -72,7 +65,10 @@ $app-menu-root-item-hover-color = lighten($color-grey-light, 10%);
   &:hover,
   &:focus,
   &:active
+    color $color-grey-dark
     outline 0
+    .icon
+      color $color-grey-dark
 
 .app-menu-sub-items
   display none
@@ -80,7 +76,7 @@ $app-menu-root-item-hover-color = lighten($color-grey-light, 10%);
   top 100%
   right -1px
   min-width 150px
-  background-color $app-menu-root-item-hover-color
+  background-color $color-lightest
   border-radius 0 0 6px 6px
   border-color $topbar-border-color
   border-style solid
@@ -96,9 +92,6 @@ $app-menu-root-item-hover-color = lighten($color-grey-light, 10%);
     border-top 1px solid $color-lightest
   &:not(:last-child)
     border-bottom 1px solid $color-grey-semi-light
-  &:hover
-    background-color $color-lightest
-    color $color-darkest
   &.app-menu-sub-item-selected
     color $color-primary
 

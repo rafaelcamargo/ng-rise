@@ -8,9 +8,19 @@
       configMenuItems();
     };
 
-    _public.onItemClick = item => {
-      if(!item.cancelNavigation)
-        routeService.go(item.routeName);
+    _public.onItemClick = (item) => {
+      if(item.nest)
+        configSubItemsVisibility(item);
+      if(!item.cancelNavigation){
+        goToRoute(item.routeName);
+        hideAllSubItems();
+      }
+    };
+
+    _public.onSubItemClick = ($event, subItem) => {
+      $event.stopImmediatePropagation();
+      goToRoute(subItem.routeName);
+      hideAllSubItems();
     };
 
     const configMenuItems = () => {
@@ -84,6 +94,23 @@
 
     const getRoutes = () => {
       return routeService.getRoutes();
+    };
+
+    const configSubItemsVisibility = parentItem => {
+      setSubItemsVisibility(parentItem, !parentItem.shouldShowSubItems);
+    };
+
+    const hideAllSubItems = () => {
+      for(var i=0; i < _public.items.length; i++)
+        setSubItemsVisibility(_public.items[i], false);
+    };
+
+    const setSubItemsVisibility = (parentItem, shouldShowSubItems) => {
+      parentItem.shouldShowSubItems = shouldShowSubItems;
+    };
+
+    const goToRoute = routeName => {
+      routeService.go(routeName);
     };
 
     $rootScope.$on('$stateChangeSuccess', () => {
