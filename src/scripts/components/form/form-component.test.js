@@ -2,156 +2,162 @@
   'use strict';
 
   describe('Form', () => {
-    const mock = angular.mock;
-    const functionMock = () => {};
-    const responseMock = {
-      success: {
-        value: 'success'
-      },
-      error: {
-        value: 'error'
-      }
-    };
-
     let $componentController,
       $rootScope,
       $scope,
-      instatiateController,
       controller,
       bindingsMock,
-      stubFormAction,
-      bindFetchActions,
-      formModelMock;
+      responseMock;
 
-    beforeEach(mock.module('app'));
-
-    beforeEach(mock.inject($injector => {
-      $rootScope = $injector.get('$rootScope');
-      $scope = $rootScope.$new();
-      $componentController = $injector.get('$componentController');
-
-      formModelMock = {
-        $error: {
-          required: [{
-            $setDirty (){}
-          }]
-        },
-        $setPristine: () => {},
-        $setUntouched: () => {},
+    function mockFormModel(){
+      $scope[bindingsMock.name] = {
+        $error: {required: [{$setDirty: jasmine.createSpy()}]},
+        $setPristine: jasmine.createSpy(),
+        $setUntouched: jasmine.createSpy()
       };
+    }
 
+    function mockResponse(){
+      responseMock = {
+        success: {value: 'success'},
+        error: {value: 'error'}
+      };
+    }
+
+    function mockControllerBindings(){
       bindingsMock = {
-        submit: functionMock,
-        submitSuccess: functionMock,
-        submitError: functionMock,
-        alert: null,
+        submit: jasmine.createSpy(),
+        submitSuccess: jasmine.createSpy(),
+        submitError: jasmine.createSpy(),
         name: 'testingForm'
       };
+    }
 
-      $scope[bindingsMock.name] = formModelMock;
+    function mockControllerFetchBindings(){
+      bindingsMock.fetch = jasmine.createSpy();
+      bindingsMock.fetchSuccess = jasmine.createSpy();
+      bindingsMock.fetchError = jasmine.createSpy();
+    }
 
-      bindFetchActions = () => {
-        bindingsMock.fetch = functionMock;
-        bindingsMock.fetchSuccess = functionMock;
-        bindingsMock.fetchError = functionMock;
-      };
+    function compileController(bindings = bindingsMock){
+      controller = $componentController('nrForm', {
+        $scope
+      }, bindings);
+    };
 
-      instatiateController = bindings => {
-        bindings = bindings || bindingsMock;
-        controller = $componentController('nrForm', {
-          $scope
-        }, bindings);
-      };
+    function stubFormAction(action, responseType, shouldAbortCallbacks){
+      bindingsMock[action].and.returnValue({
+        then (successCallback, errorCallback){
+          if (!shouldAbortCallbacks && responseType == 'success')
+            successCallback(responseMock.success);
+          else if (!shouldAbortCallbacks)
+            errorCallback(responseMock.error);
+        }
+      });
+    }
 
-      stubFormAction = (action, responseType, shouldAbortCallbacks, shouldReturnPromise) => {
-        if (shouldReturnPromise)
-          spyOn(controller, action).and.returnValue({
-            $promise: {
-              then (successCallback, errorCallback){
-                if (!shouldAbortCallbacks && responseType == 'success')
-                  successCallback(responseMock.success);
-                else if (!shouldAbortCallbacks)
-                  errorCallback(responseMock.error);
-              }
-            }
-          });
-        else
-          spyOn(controller, action);
-      };
-
-      spyOn($scope[bindingsMock.name].$error.required[0], '$setDirty');
-      spyOn($scope[bindingsMock.name], '$setPristine');
-      spyOn($scope[bindingsMock.name], '$setUntouched');
-    }));
+    beforeEach(() => {
+      module('app');
+      inject($injector => {
+        $rootScope = $injector.get('$rootScope');
+        $componentController = $injector.get('$componentController');
+        $scope = $rootScope.$new();
+      });
+      mockControllerBindings();
+      mockResponse();
+      mockFormModel();
+    });
 
     it('should clear any alert on form submit', () => {
-      instatiateController();
-      stubFormAction('submit', 'success', false, true);
+      compileController();
+      stubFormAction('submit', 'success', true, true);
+      controller.alert = {some: 'alert'};
       controller.sendData();
-      expect(controller.alert).toEqual(null);
+      expect(controller.alert).toEqual(undefined);
     });
 
     it('should set loader css class on form submit', () => {
-      instatiateController();
+      compileController();
       stubFormAction('submit', 'success', true, true);
       controller.sendData();
       expect(controller.loaderCssClass).toEqual('form-loading');
     });
 
     it('should clear loader css class when form submit completes', () => {
-      instatiateController();
-      stubFormAction('submit', 'success', false, true);
+      compileController();
+      stubFormAction('submit', 'success');
       controller.sendData();
       expect(controller.loaderCssClass).toEqual('');
     });
 
-    it('should call submit bound action on form submit', () => {
-      instatiateController();
-      stubFormAction('submit', 'success', false, true);
+    it('should call submit callback on form submit', () => {
+      compileController();
+      stubFormAction('submit', 'success');
       controller.sendData();
       expect(controller.submit).toHaveBeenCalled();
     });
 
     it('should call success callback on form submit success', () => {
-      instatiateController();
-      stubFormAction('submit', 'success', false, true);
-      spyOn(controller, 'submitSuccess');
+      compileController();
+      stubFormAction('submit', 'success');
       controller.sendData();
       expect(controller.submitSuccess).toHaveBeenCalledWith({
         value: 'success'
       });
     });
 
+    it('should show custom success alert on submit success', () => {
+      bindingsMock.submitSuccessMessage = 'My custom success!';
+      compileController(bindingsMock);
+      stubFormAction('submit', 'success');
+      controller.sendData();
+      expect(controller.alert).toEqual({
+        type: 'success',
+        message: bindingsMock.submitSuccessMessage,
+        retryAction: undefined
+      });
+    });
+
     it('should call error callback on form submit error', () => {
-      instatiateController();
-      stubFormAction('submit', 'error', false, true);
-      spyOn(controller, 'submitError');
+      compileController();
+      stubFormAction('submit', 'error');
       controller.sendData();
       expect(controller.submitError).toHaveBeenCalledWith({
         value: 'error'
       });
     });
 
-    it('should not call fetch bound action on initialization if it was not provided', () => {
-      instatiateController();
+    it('should just show error alert when no error callback is provided', () => {
+      delete bindingsMock.submitError;
+      compileController(bindingsMock);
+      stubFormAction('submit', 'error');
+      controller.sendData();
+      expect(controller.alert).toEqual({
+        type: 'error',
+        message: 'Something went wrong. Please, try again',
+        retryAction: controller.sendData
+      });
+    });
+
+    it('should not call fetch callback on initialization if it was not provided', () => {
+      compileController();
       spyOn(controller, 'fetchData');
       controller.$onInit();
       expect(controller.fetchData).not.toHaveBeenCalled();
     });
 
-    it('should call fetch bound action on initialization if it was provided', () => {
-      bindFetchActions();
-      instatiateController();
-      stubFormAction('fetch', 'success', false, true);
+    it('should call fetch callback on initialization if it was provided', () => {
+      mockControllerFetchBindings();
+      compileController();
+      stubFormAction('fetch', 'success');
       controller.$onInit();
       expect(controller.fetch).toHaveBeenCalled();
     });
 
     it('should call success callback on form fetch success', () => {
-      bindFetchActions();
-      instatiateController();
-      stubFormAction('fetch', 'success', false, true);
-      spyOn(controller, 'fetchSuccess');
+      mockControllerFetchBindings();
+      compileController();
+      stubFormAction('fetch', 'success');
       controller.$onInit();
       expect(controller.fetchSuccess).toHaveBeenCalledWith({
         value: 'success'
@@ -159,60 +165,34 @@
     });
 
     it('should call error callback on form fetch error', () => {
-      bindFetchActions();
-      instatiateController();
-      stubFormAction('fetch', 'error', false, true);
-      spyOn(controller, 'fetchError');
+      mockControllerFetchBindings();
+      compileController();
+      stubFormAction('fetch', 'error');
       controller.$onInit();
       expect(controller.fetchError).toHaveBeenCalledWith({
         value: 'error'
       });
     });
 
-    it('should not clear alert when request is not sent on form submit', () => {
-      const mockAlert = {
-        type: 'error',
-        message: 'any message'
-      };
+    // it('should bind form controller on initialization', () => {
+    //   bindingsMock.bindCtrl = true;
+    //   bindingsMock.ctrl = null;
+    //   compileController(bindingsMock);
+    //   controller.$onInit();
+    //   expect(controller.ctrl.sendData).toBeDefined();
+    //   expect(controller.ctrl.fetchData).toBeDefined();
+    // });
+    //
+    // it('should not bind form controller on initialization', () => {
+    //   compileController(bindingsMock);
+    //   controller.$onInit();
+    //   expect(controller.formCtrl).not.toBeDefined();
+    // });
 
-      instatiateController();
-      stubFormAction('submit', null, false, false);
-      controller.alert = mockAlert;
+    it('should reset form to pristine and untouched states on submit success', () => {
+      compileController(bindingsMock);
+      stubFormAction('submit', 'success');
       controller.sendData();
-      expect(controller.alert).toEqual(mockAlert);
-    });
-
-    it('should not set loader css class when request is not sent on form submit', () => {
-      instatiateController();
-      stubFormAction('submit', null, false, false);
-      controller.sendData();
-      expect(controller.loaderCssClass).toEqual(undefined);
-    });
-
-    it('should bind form controller on initialization', () => {
-      bindingsMock.bindCtrl = true;
-      bindingsMock.ctrl = null;
-      instatiateController(bindingsMock);
-      controller.$onInit();
-      expect(controller.ctrl.sendData).toBeDefined();
-      expect(controller.ctrl.fetchData).toBeDefined();
-    });
-
-    it('should not bind form controller on initialization', () => {
-      instatiateController(bindingsMock);
-      controller.$onInit();
-      expect(controller.formCtrl).not.toBeDefined();
-    });
-
-    it('should highlight error fields setting all of them to dirty', () => {
-      instatiateController(bindingsMock);
-      controller.highlightErrorFields();
-      expect($scope[bindingsMock.name].$error.required[0].$setDirty).toHaveBeenCalled();
-    });
-
-    it('should reset form to pristine and untouched states', () => {
-      instatiateController(bindingsMock);
-      controller.reset();
       expect($scope[bindingsMock.name].$setPristine).toHaveBeenCalled();
       expect($scope[bindingsMock.name].$setUntouched).toHaveBeenCalled();
     });
