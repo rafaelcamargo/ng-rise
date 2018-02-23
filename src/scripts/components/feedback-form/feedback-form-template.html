@@ -7,27 +7,29 @@
     <nr-row>
       <nr-row-item
         data-size="12"
-        data-label="How long you work as software developer?">
-        <input type="text" ng-model="$ctrl.experience" />
+        data-label="How long have you worked as software developer?">
+        <input type="text" ng-model="$ctrl.experience" required/>
       </nr-row-item>
     </nr-row>
     <nr-row>
       <nr-row-item
         data-size="12"
         data-label="What is your opinion about Component-Based Architecture?">
-        <input type="text" ng-model="$ctrl.opinion" />
+        <input type="text" ng-model="$ctrl.opinion" required/>
       </nr-row-item>
     </nr-row>
     <nr-row>
       <nr-row-item
         data-size="12"
-        data-label="Know a greater architecture or have you noticed anything that could be better here?">
+        data-label="Have you known a greater architecture or noticed anything that could be better here?">
         <input type="text" ng-model="$ctrl.suggestions" />
       </nr-row-item>
     </nr-row>
     <nr-row>
       <nr-row-item>
-        <button type="submit">
+        <button
+          type="submit"
+          class="button-primary">
           Send
         </button>
       </nr-row-item>
