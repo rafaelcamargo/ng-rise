@@ -8,21 +8,21 @@
       <nr-row-item
         data-size="12"
         data-label="How long have you worked as software developer?">
-        <input type="text" ng-model="$ctrl.experience" required/>
+        <input type="number" ng-model="$ctrl.experience" required/>
       </nr-row-item>
     </nr-row>
     <nr-row>
       <nr-row-item
         data-size="12"
         data-label="What is your opinion about Component-Based Architecture?">
-        <input type="text" ng-model="$ctrl.opinion" required/>
+        <textarea ng-model="$ctrl.opinion" required></textarea>
       </nr-row-item>
     </nr-row>
     <nr-row>
       <nr-row-item
         data-size="12"
         data-label="Have you known a greater architecture or noticed anything that could be better here?">
-        <input type="text" ng-model="$ctrl.suggestions" />
+        <textarea ng-model="$ctrl.suggestions" required></textarea>
       </nr-row-item>
     </nr-row>
     <nr-row>
