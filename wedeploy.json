@@ -1,0 +1,4 @@
+{
+  "id": "app",
+  "command": ["npm", "run", "start:production"]
+}

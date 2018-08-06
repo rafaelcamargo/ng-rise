@@ -131,8 +131,8 @@ gulp.task('revise:css', () => {
 gulp.task('serve', function(){
   return gulp.src(project.index.dist.root)
     .pipe(webserver({
-      livereload: true,
-      port: 4000,
+      livereload: ENV.SERVER.LIVE_RELOAD,
+      port: ENV.SERVER.PORT,
       host: '0.0.0.0'
     }));
 });
@@ -178,6 +178,13 @@ gulp.task('start',
     'build:base',
     'serve',
     'watch'
+  )
+);
+
+gulp.task('start:production',
+  gulp.series(
+    'build',
+    'serve'
   )
 );
 

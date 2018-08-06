@@ -11,6 +11,7 @@
   "scripts": {
     "build": "./node_modules/gulp/bin/gulp.js build",
     "start": "./node_modules/gulp/bin/gulp.js start",
+    "start:production": "./node_modules/gulp/bin/gulp.js start:production --env=prod",
     "serve": "./node_modules/gulp/bin/gulp.js serve",
     "test": "./node_modules/gulp/bin/gulp.js test",
     "deploy": "./node_modules/firebase-tools/bin/firebase deploy --non-interactive"

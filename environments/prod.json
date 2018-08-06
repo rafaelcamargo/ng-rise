@@ -1,5 +1,9 @@
 {
-  "TYPE": "prod",
+  "PRODUCTION": true,
+  "SERVER": {
+    "PORT": 80,
+    "LIVE_RELOAD": false
+  },
   "FORMSPREE": {
     "BASE_URL": "https://formspree.io"
   },
