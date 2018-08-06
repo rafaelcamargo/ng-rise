@@ -1,0 +1,6 @@
+{
+  "TYPE": "dev",
+  "MINIFY": false,
+  "SOURCE_MAPS": false,
+  "REVISE": false
+}

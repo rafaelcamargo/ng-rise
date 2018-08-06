@@ -1,0 +1,6 @@
+{
+  "TYPE": "prod",
+  "MINIFY": true,
+  "SOURCE_MAPS": true,
+  "REVISE": true
+}

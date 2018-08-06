@@ -1,17 +1,11 @@
 const fs = require('fs'),
-  argv = require('yargs').argv,
-  project = JSON.parse(fs.readFileSync('./project.json', 'utf8'));
-
-function getEnvironmentFile(){
-  const env = argv.env || 'dev';
-  return `${project.environments.source.root}/${env}.js`;
-}
+  project = require('./project.json');
 
 function getFiles(){
   return project.scripts.vendor.files
     .concat(project.scripts.test.vendor.files)
     .concat([
-      getEnvironmentFile(),
+      `${project.environments.dist.root}/${project.environments.dist.filename}`,
       project.templates.source.files,
       project.scripts.source.files[0]
     ]);

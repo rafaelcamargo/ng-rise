@@ -1,5 +1,6 @@
-var fs = require('fs'),
-  argv = require('yargs').argv,
+const fs = require('fs'),
+  { argv } = require('yargs'),
+  { exec } = require('child_process'),
   gulp = require('gulp'),
   gutil = require('gulp-util'),
   concat = require('gulp-concat'),
@@ -13,43 +14,24 @@ var fs = require('fs'),
   templateCache = require('gulp-angular-templatecache'),
   htmlmin = require('gulp-htmlmin'),
   rename = require('gulp-rename'),
-  project = JSON.parse(fs.readFileSync('./project.json', 'utf8')),
+  writefile = require('writefile'),
+  Server = require('karma').Server,
+  project = require('./project.json'),
+  ENV_DEV = require('./environments/dev.json'),
+  ENV_PROD = require('./environments/prod.json'),
+  ENV = argv.env == 'prod' ? ENV_PROD : ENV_DEV,
   fingerprint = new Date().getTime();
-
-function getEnv(){
-  return argv.env || 'dev';
-}
-
-function isEnvDev(){
-  return getEnv() == 'dev'
-}
-
-function isEnvProd(){
-  return getEnv() == 'prod'
-}
-
-function isEnvSandbox(){
-  return getEnv() == 'sandbox'
-}
-
-function shouldGenerateSourceMaps(){
-  return isEnvDev() || isEnvSandbox();
-}
-
-function shouldRevise(){
-  return isEnvProd() || isEnvSandbox();
-}
 
 function revise(){
   return replace(/@@fingerprint/g, fingerprint);
 }
 
 gulp.task('js:env', () => {
-  const file = `${project.environments.source.root}/${getEnv()}.js`;
-  return gulp.src(file)
-    .pipe(minify({mangle: false}).on('error', gutil.log))
-    .pipe(rename(project.environments.dist.filename))
-    .pipe(gulp.dest(project.environments.dist.root));
+  const fileContent = `window.ENV = ${JSON.stringify(ENV)}`;
+  return writefile(
+    `${project.environments.dist.root}/${project.environments.dist.filename}`,
+    fileContent
+  );
 });
 
 gulp.task('js:lib', () => {
@@ -60,11 +42,20 @@ gulp.task('js:lib', () => {
 
 gulp.task('js:app', () => {
   return gulp.src(project.scripts.source.files)
-    .pipe(gulpif(shouldGenerateSourceMaps(), sourcemaps.init()))
+    .pipe(gulpif(ENV.SOURCE_MAPS, sourcemaps.init()))
     .pipe(concat(project.scripts.dist.filename))
-    .pipe(gulpif(!isEnvDev(), minify({mangle: false}).on('error', gutil.log)))
-    .pipe(gulpif(shouldGenerateSourceMaps(), sourcemaps.write()))
+    .pipe(gulpif(ENV.MINIFY, minify({mangle: false}).on('error', gutil.log)))
+    .pipe(gulpif(ENV.SOURCE_MAPS, sourcemaps.write()))
     .pipe(gulp.dest(project.scripts.dist.root));
+});
+
+gulp.task('js:test', function(done) {
+  exec('./node_modules/karma/bin/karma start', (err, stdout, stderr) => {
+    if(err)
+      console.log(err);
+    console.log(stdout);
+    done();
+  });
 });
 
 gulp.task('css:lib', function(){
@@ -117,8 +108,8 @@ gulp.task('fonts', () => {
 
 gulp.task('index', () => {
   return gulp.src(project.index.source.file)
-    .pipe(gulpif(shouldRevise(), revise()))
-    .pipe(gulpif(isEnvProd(), htmlmin({
+    .pipe(gulpif(ENV.REVISE, revise()))
+    .pipe(gulpif(ENV.MINIFY, htmlmin({
       collapseWhitespace: true,
       removeComments: true
     })))
@@ -127,13 +118,13 @@ gulp.task('index', () => {
 
 gulp.task('revise:index', () => {
   return gulp.src(project.index.dist.file)
-    .pipe(gulpif(shouldRevise(), revise()))
+    .pipe(gulpif(ENV.REVISE, revise()))
     .pipe(gulp.dest(project.index.dist.root));
 });
 
 gulp.task('revise:css', () => {
   return gulp.src(project.styles.dist.file)
-    .pipe(gulpif(shouldRevise(), revise()))
+    .pipe(gulpif(ENV.REVISE, revise()))
     .pipe(gulp.dest(project.styles.dist.root));
 });
 
@@ -147,11 +138,11 @@ gulp.task('serve', function(){
 });
 
 gulp.task('watch', () => {
-    gulp.watch(project.scripts.source.files, gulp.parallel('js:app'));
-    gulp.watch(project.styles.source.files, gulp.parallel('css:app'));
-    gulp.watch(project.templates.source.files, gulp.parallel('html:templates'));
-    gulp.watch(project.images.source.files, gulp.parallel('images'));
-    gulp.watch(project.index.source.file, gulp.parallel('index'));
+  gulp.watch(project.scripts.source.files, gulp.parallel('js:app'));
+  gulp.watch(project.styles.source.files, gulp.parallel('css:app'));
+  gulp.watch(project.templates.source.files, gulp.parallel('html:templates'));
+  gulp.watch(project.images.source.files, gulp.parallel('images'));
+  gulp.watch(project.index.source.file, gulp.parallel('index'));
 });
 
 gulp.task('build:base',
@@ -187,5 +178,12 @@ gulp.task('start',
     'build:base',
     'serve',
     'watch'
+  )
+);
+
+gulp.task('test',
+  gulp.series(
+    'js:env',
+    'js:test'
   )
 );
