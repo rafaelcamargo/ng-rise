@@ -1,6 +1,6 @@
 {
   "name": "ng-rise",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Rise a lite AngularJS application in minutes",
   "author": "Rafael Camargo <contato@rafaelcamargo.com>",
   "repository": {
@@ -12,7 +12,8 @@
     "build": "./node_modules/gulp/bin/gulp.js build",
     "start": "./node_modules/gulp/bin/gulp.js start",
     "serve": "./node_modules/gulp/bin/gulp.js serve",
-    "test": "./node_modules/karma/bin/karma start"
+    "test": "./node_modules/gulp/bin/gulp.js test",
+    "deploy": "./node_modules/firebase-tools/bin/firebase deploy --non-interactive"
   },
   "dependencies": {
     "angular": "1.5.11",
@@ -24,6 +25,8 @@
   },
   "devDependencies": {
     "angular-mocks": "1.5.11",
+    "codecov": "^3.0.4",
+    "firebase-tools": "^4.0.3",
     "gulp": "gulpjs/gulp.git#4.0",
     "gulp-angular-templatecache": "2.0.0",
     "gulp-babel-minify": "^0.2.0",
