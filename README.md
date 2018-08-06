@@ -2,6 +2,7 @@
 Angular Rise is a starter kit for AngularJS applications structured on a component based architecture.
 
 [![CircleCI](https://circleci.com/gh/rafaelcamargo/ng-rise.svg?style=svg)](https://circleci.com/gh/rafaelcamargo/ng-rise)
+[![codecov](https://codecov.io/gh/rafaelcamargo/ng-rise/branch/master/graph/badge.svg)](https://codecov.io/gh/rafaelcamargo/ng-rise)
 
 ## Contributing
 
