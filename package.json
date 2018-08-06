@@ -47,6 +47,7 @@
     "karma-jsdom-launcher": "5.0.0",
     "karma-mocha-reporter": "2.1.0",
     "karma-ng-html2js-preprocessor": "1.0.0",
+    "writefile": "^0.2.8",
     "yargs": "8.0.2"
   }
 }
