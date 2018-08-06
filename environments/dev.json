@@ -1,0 +1,9 @@
+{
+  "TYPE": "dev",
+  "FORMSPREE": {
+    "BASE_URL": "https://formspree.io"
+  },
+  "MINIFY": false,
+  "SOURCE_MAPS": false,
+  "REVISE": false
+}

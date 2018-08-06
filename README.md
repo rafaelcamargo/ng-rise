@@ -22,8 +22,6 @@ cd ng-rise
 npm install
 ```
 
-**NOTE:** For speed reasons, we encourage the use of [yarn](https://yarnpkg.com/en/docs/install) over npm.
-
 5. If you want just build the project, run:
 ``` bash
 npm run build
